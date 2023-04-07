@@ -1,10 +1,12 @@
-from yahoo_fin.stock_info import get_data
+from yahoo_fin.stock_info import get_data, get_live_price
 import pandas as pd
+from datetime import date, timedelta
 
 
-def get_current_stocks():
-    amazon = get_data('amzn', start_date="05-09-2013",
-                      end_date="07-04-2023", index_as_date=True, interval="1wk")
+def get_historical_data(ticker, start_date="09-05-2013"):
+    today = date.today().strftime("%m/%d/%Y")
+    amazon = get_data(ticker, start_date=start_date,
+                      end_date=today, index_as_date=True, interval="1d")
     df = pd.DataFrame()
     df['avg'] = (amazon['high'] + amazon['low'])/2
 
@@ -20,4 +22,23 @@ def get_current_stocks():
     for i in range(len(dates)):
         data.append({"date": dates[i], "price": prices[i]})
 
+    return data
+
+
+def get_today_data(tickers=list(), flag="limited"):
+    # today = date.today().strftime("%m/%d/%Y")
+    data = list()
+    yesterday = (date.today() - timedelta(days=1)).strftime("%m/%d/%Y")
+    if flag == "limited":
+        for ticker in tickers:
+            h_data = get_historical_data(ticker, yesterday)
+            prev_price = h_data["price"]
+            curr_price = get_live_price(ticker)
+            change = curr_price - prev_price
+            p_change = change * 100/prev_price
+
+            data.append({"ticker": ticker,
+                         "curr_Price": curr_price,
+                         "change": change,
+                         "p_change": p_change})
     return data

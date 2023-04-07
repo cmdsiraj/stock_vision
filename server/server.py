@@ -1,5 +1,5 @@
-from flask import Flask
-from stocks import get_current_stocks
+from flask import Flask, request
+from stocks import get_historical_data, get_today_data
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -13,8 +13,20 @@ def home():
 
 @app.route("/get_stock_data")
 def get_stock_data():
-    data = get_current_stocks()
-    return data
+    ticker = request.args.get('ticker')
+    if ticker:
+        data = get_historical_data(ticker)
+        return data
+
+
+@app.route("/get_today_data")
+def get_today_data():
+    tickers = request.args.get('tickers')
+    tickers = tickers.split(",")
+    print(tickers)
+    if (len(tickers) != 0):
+        data = get_today_data(tickers)
+        return data
 
 
 if __name__ == '__main__':
