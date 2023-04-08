@@ -33,28 +33,28 @@ return (
 
     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-3 py-3 ">
+                <th scope="col" class="px-6 py-3 ">
                     Name
                 </th>
-                <th scope="col" class="px-3 py-3 ">
+                <th scope="col" class="px-6 py-3 ">
                     Value
                 </th>
-                <th scope="col" class="px-5 py-3 ">
+                <th scope="col" class="px-6 py-3 ">
                     Change
                 </th>
-                <th scope="col" class="px-5 py-3 ">
+                <th scope="col" class="px-6 py-3 ">
                     %Change
                 </th>
-                <th scope="col" class="px-3 py-3 ">
+                <th scope="col" class="px-6 py-3 ">
                     Open
                 </th>
-                <th scope="col" class="px-3 py-3 ">
+                <th scope="col" class="px-6 py-3 ">
                     High
                 </th>
-                <th scope="col" class="px-3 py-3 ">
+                <th scope="col" class="px-6 py-3 ">
                     Low
                 </th>
-                <th scope="col" class="px-3 py-3 ">
+                <th scope="col" class="px-6 py-3 ">
                     Previous
                 </th>
             </tr>

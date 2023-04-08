@@ -5,11 +5,11 @@ function StockChartColumn({ data, onClickFunction, sign }) {
   return (
     <>
       <div
-        className="flex flex-row border-solid border-2 p-1 items-center bg-gray-700 text-white text-sm"
+        className="flex flex-row border-b items-center bg-gray-900 text-white text-sm"
         onClick={onClickFunction}
       >
-        <span className="flex-auto ps-4">{data.ticker}</span>
-        <span className="flex-auto">{data.curr}</span>
+        <span className="flex-auto font-medium text-gray-900 whitespace dark:text-white ps-4">{data.ticker}</span>
+        <span className="flex-auto text-sm text-slate-400">{data.curr}</span>
 
         <span
           className={
