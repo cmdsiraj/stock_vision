@@ -80,11 +80,38 @@ def get_current_day_stocks():
         })
     return json.dumps(data)
 
+
+
+
+
+
+
+
+
+
 from alpha_vantage.timeseries import TimeSeries
 import csv
 import requests
 
 key='26NVD1ND5SCLCG70'
+
+
+#previous price = 'close'
+#['time', 'open', 'high', 'low', 'close', 'volume']
+def prev_data(code):
+    CSV_URL = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED&symbol='+code+'&interval=15min&slice=year1month1&apikey='+key
+
+    with requests.Session() as s:
+        download = s.get(CSV_URL)
+        decoded_content = download.content.decode('utf-8')
+        cr = csv.reader(decoded_content.splitlines(), delimiter=',')
+        my_list = list(cr)
+        price_dict={}
+        for row in my_list:
+            price_dict[row[0]]=row[4]
+        return price_dict
+
+
 
 def present_price(code):
     url = f"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="+code+"&apikey="+key
@@ -92,6 +119,17 @@ def present_price(code):
     data = response.json()
     # print(data)
     return data
+#format of present price return value
+# {'Global Quote': {'01. symbol': 'IBM',
+#   '02. open': '132.1600',
+#   '03. high': '132.6000',
+#   '04. low': '130.3150',
+#   '05. price': '130.5000',
+#   '06. volume': '3050581',
+#   '07. latest trading day': '2023-04-06',
+#   '08. previous close': '132.1400',
+#   '09. change': '-1.6400',
+#   '10. change percent': '-1.2411%'}}
 
 def get_ticker_dict(tickers=list()):
     data= []

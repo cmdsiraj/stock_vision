@@ -1,6 +1,7 @@
 import React from "react";
 import SideChart from "../components/SideChart";
 import StockTable from "../components/stockTable";
+import Converter from "../components/converter";
 
 function Home() {
   return (
@@ -10,7 +11,9 @@ function Home() {
   <SideChart class="basis-2/3"/>
 
 </div>
-      
+      <div>
+        <Converter />
+      </div>
       
     </>
   );

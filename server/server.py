@@ -1,6 +1,8 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from stocks import get_historical_data, get_today_data,get_current_day_stocks
 from flask_cors import CORS
+import requests
+import csv
 
 app = Flask(__name__)
 CORS(app)
@@ -32,6 +34,8 @@ def get_today():
 def get_table_display_data():
     data=get_current_day_stocks()
     return data
+
+
 
 if __name__ == '__main__':
     app.run()
