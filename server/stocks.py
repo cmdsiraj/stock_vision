@@ -52,8 +52,9 @@ def get_today_data(tickers=list(), flag="limited"):
 
 
 def get_current_day_stocks():
-    ticker_list = ['AAPL', 'GOOGL', 'TSLA', "AMZN"]
-    date = datetime.today()
+    # ticker_list=['TSLA','NFLX','AMC','AI','GOOGL','AMD','MSFT','INTC','AAPL','AMZN','AUY','BAC','APE','NVDA','F']
+    ticker_list=['TSLA','NFLX','GOOGL','AAPL','AMZN','NVDA','MSFT','AI','AMC','T','META','PFE']
+    date=datetime.today()
     previous_date = date - timedelta(days=1)
     previous_date1 = str(previous_date.month)+"/" + \
         str(previous_date.day)+"/"+str(previous_date.year)
