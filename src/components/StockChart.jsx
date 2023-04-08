@@ -2,15 +2,14 @@ import React, { useEffect } from "react";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
 
-const StockChart = ({ data }) => {
+const StockChart = ({ data, ticker }) => {
   useEffect(() => {
-    // Highcharts options object
     const options = {
       chart: {
         type: "line",
       },
       title: {
-        text: "Stock Price Chart",
+        text: ticker,
       },
       xAxis: {
         type: "datetime",
@@ -28,10 +27,7 @@ const StockChart = ({ data }) => {
       ],
     };
 
-    // Create the chart
     const chart = Highcharts.stockChart("stock-chart", options);
-
-    // Clean up the chart when the component unmounts
     return () => {
       chart.destroy();
     };

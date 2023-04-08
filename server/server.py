@@ -12,7 +12,7 @@ def home():
 
 
 @app.route("/get_stock_data")
-def get_stock_data():
+def get_historical():
     ticker = request.args.get('ticker')
     if ticker:
         data = get_historical_data(ticker)
@@ -20,10 +20,10 @@ def get_stock_data():
 
 
 @app.route("/get_today_data")
-def get_today_data():
+def get_today():
     tickers = request.args.get('tickers')
     tickers = tickers.split(",")
-    print(tickers)
+    # print(type(tickers))
     if (len(tickers) != 0):
         data = get_today_data(tickers)
         return data
