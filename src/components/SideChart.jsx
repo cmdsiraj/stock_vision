@@ -34,7 +34,7 @@ const SideChart = () => {
   return (
     <>
       <button onClick={() => get_data()}>Show Chart</button>
-      <button onClick={() => get_today()}>Today</button>
+      {/* <button onClick={() => get_today()}>Today</button> */}
       {visible && stockData.length != 0 ? (
         <StockChart data={stockData} />
       ) : visible && stockData.length === 0 ? (
