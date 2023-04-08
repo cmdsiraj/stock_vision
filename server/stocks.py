@@ -7,7 +7,7 @@ from datetime import date, timedelta, datetime
 def get_historical_data(ticker, start_date="09-05-2013"):
     today = date.today().strftime("%m/%d/%Y")
     amazon = get_data(ticker, start_date=start_date,
-                      end_date=today, index_as_date=True, interval="1d")
+                      end_date=today, index_as_date=True, interval="1mo")
     df = pd.DataFrame()
     df['avg'] = (amazon['high'] + amazon['low'])/2
 
@@ -38,14 +38,14 @@ def get_today_data(tickers=list(), flag="limited"):
             change = curr_price - prev_price
             p_change = (change/prev_price)*100
 
-            print({"ticker": ticker,
-                   "curr": round(curr_price, 5),
-                   "prev": round(prev_price, 2),
-                   "change": round(change, 2),
-                   "p_change": round(p_change, 2)})
+            # print({"ticker": ticker,
+            #        "curr": round(curr_price, 5),
+            #        "prev": round(prev_price, 2),
+            #        "change": round(change, 2),
+            #        "p_change": round(p_change, 2)})
 
             data.append({"ticker": ticker,
-                         "curr": round(curr_price, 5),
+                         "curr": round(curr_price, 3),
                          "change": round(change, 2),
                          "p_change": round(p_change, 2)})
     return data
@@ -79,3 +79,29 @@ def get_current_day_stocks():
             "name": i, "value": value, "open": open, "high": high, "low": low, "prev": prev,
         })
     return json.dumps(data)
+
+from alpha_vantage.timeseries import TimeSeries
+import csv
+import requests
+
+key='26NVD1ND5SCLCG70'
+
+def present_price(code):
+    url = f"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="+code+"&apikey="+key
+    response = requests.get(url)
+    data = response.json()
+    # print(data)
+    return data
+
+def get_ticker_dict(tickers=list()):
+    data= []
+    # today = date.today()
+    # yesterday=date(today.year, today.month, today.day - 1)
+    for i in tickers:
+        ticker_data=present_price(i)['Global Quote']
+        prev_price = ticker_data['08. previous close']
+        curr_price = ticker_data['05. price']
+        change = ticker_data['09. change']
+        p_change = ticker_data['10. change percent']
+        data.append({"ticker": i,"curr_Price": curr_price,"change": change,"p_change": p_change})
+    return data
