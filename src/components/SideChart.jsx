@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import StockChart from "../components/StockChart";
-import StockChartColumn from "./StockChartColumn";
+import StockChartColumn from "./StockChartRow";
 
 const SideChart = () => {
   const [visible, setVisible] = useState(false);
@@ -41,7 +41,7 @@ const SideChart = () => {
 
   return (
     <>
-      <div className="grid w-4/12">
+      <div className="grid">
         <div className="flex-1">
           {stockData.length != 0 ? (
             <StockChart data={stockData} ticker={chartTicker} />
@@ -53,6 +53,7 @@ const SideChart = () => {
           {todayData.map((data) => (
             <StockChartColumn
               data={data}
+              sign={data.change >= 0 ? "+" : "-"}
               onClickFunction={() => get_data(data.ticker)}
             />
           ))}

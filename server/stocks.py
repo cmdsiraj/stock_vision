@@ -7,7 +7,7 @@ from datetime import date, timedelta, datetime
 def get_historical_data(ticker, start_date="09-05-2013"):
     today = date.today().strftime("%m/%d/%Y")
     amazon = get_data(ticker, start_date=start_date,
-                      end_date=today, index_as_date=True, interval="1d")
+                      end_date=today, index_as_date=True, interval="1mo")
     df = pd.DataFrame()
     df['avg'] = (amazon['high'] + amazon['low'])/2
 
