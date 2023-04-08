@@ -32,13 +32,14 @@ def get_today_data(tickers=list(), flag="limited"):
     if flag == "limited":
         for ticker in tickers:
             h_data = get_historical_data(ticker, yesterday)
-            prev_price = h_data["price"]
+            prev_price = h_data[0]["price"]
             curr_price = get_live_price(ticker)
             change = curr_price - prev_price
-            p_change = change * 100/prev_price
+            p_change = (change/prev_price)*100
 
             data.append({"ticker": ticker,
-                         "curr_Price": curr_price,
-                         "change": change,
-                         "p_change": p_change})
+                         "curr_Price": round(curr_price, 5),
+                         "prev_price": round(prev_price, 2),
+                         "change": round(change, 2),
+                         "p_change": round(p_change, 2)})
     return data
