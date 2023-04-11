@@ -41,14 +41,14 @@ const SideChart = () => {
 
   return (
     <>
-      <div className="grid">
-        <div className="flex-1">
+      <div className="flex flex-col">
+        {/* <div className="flex-1 h-48"> */}
           {stockData.length != 0 ? (
             <StockChart data={stockData} ticker={chartTicker} />
           ) : (
             <h2>Unable to Show Data</h2>
           )}
-        </div>
+        {/* </div> */}
         <div className="">
           {todayData.map((data) => (
             <StockChartColumn
