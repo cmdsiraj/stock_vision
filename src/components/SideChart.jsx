@@ -49,13 +49,24 @@ const SideChart = () => {
       .catch((e) => alert("Error in fetching data: " + e));
   };
 
+  const checkIsPresent = (list, item) => {
+    list.map((data) => {
+      if (data === item) return true;
+      else return false;
+    });
+  };
+
   const addToCharListDataList = (ticker) => {
     ticker = ticker.toUpperCase();
-    console.log("Button Clicked");
-    getChartListData([ticker]).then((data) => {
-      setCharListData((list) => [data[0], ...list]);
+    if (checkIsPresent(tickers, ticker)) {
       getAndSetChartData(ticker);
-    });
+    } else {
+      getChartListData([ticker]).then((data) => {
+        setCharListData((list) => [data[0], ...list]);
+        getAndSetChartData(ticker);
+      });
+    }
+    // console.log("Button Clicked");
   };
 
   return (
