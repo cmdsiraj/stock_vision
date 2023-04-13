@@ -7,7 +7,7 @@ function Home() {
   return (
     <>
       <div>
-        {/* <StockTable /> */}
+         {/*s*/}
         <SideChart />
       </div>
       {/* <div>
