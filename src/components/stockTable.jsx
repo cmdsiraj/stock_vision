@@ -7,7 +7,7 @@ function create_row(stock) {
     <StockRow
       name={stock.name}
       value={stock.value}
-      open={stock.open_price}
+      open={stock.open}
       high={stock.high}
       low={stock.low}
       prev={stock.prev}
@@ -17,19 +17,17 @@ function create_row(stock) {
 function StockTable() {
   const [stockData, setData] = useState([]);
   const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    get_data();
-  }, []);
-  function get_data() {
+
+   function get_data() {
     if (!visible) {
       fetch(" http://127.0.0.1:5000/get_table_display_data")
         .then((res) => res.json())
         .then((data) => {
+          console.log(data);
           setData(data);
         });
       setVisible(!visible);
-    }
-  }
+   }}
 
   return (
     <div class="relative overflow-x-hidden shadow-md">
@@ -63,10 +61,18 @@ function StockTable() {
           </tr>
         </thead>
         <tbody>
-          {visible && stockData.length != 0
-            ? stockData.map(create_row)
-            : visible && stockData.length === 0(<h2>Unable to Show Data</h2>)}
-          {stockData.map(create_row)}
+
+
+          {get_data()}
+
+        {visible && stockData.length != 0 ? (
+stockData.map(create_row)
+      ) : visible && stockData.length === 0 ? (
+        <h2>Unable to Show Data</h2>
+      ) : (
+        <>Click to show!!</>
+      )}
+{console.log(stockData)}
         </tbody>
       </table>
     </div>
