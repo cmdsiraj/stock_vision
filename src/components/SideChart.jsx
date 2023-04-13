@@ -50,6 +50,7 @@ const SideChart = () => {
   };
 
   const addToCharListDataList = (ticker) => {
+    ticker = ticker.toUpperCase();
     console.log("Button Clicked");
     getChartListData([ticker]).then((data) => {
       setCharListData((list) => [data[0], ...list]);
@@ -71,7 +72,7 @@ const SideChart = () => {
             onClickFunction={addToCharListDataList}
           />
         </div>
-        <div className="overflow-auto h-2/6">
+        <div className="overflow-y-auto h-1/6">
           {charListData.map((data) => (
             <StockChartRow
               data={data}

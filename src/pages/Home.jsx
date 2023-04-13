@@ -7,7 +7,7 @@ function Home() {
   return (
     <>
       <div>
-        <StockTable />
+        {/* <StockTable /> */}
         <SideChart />
       </div>
       {/* <div>

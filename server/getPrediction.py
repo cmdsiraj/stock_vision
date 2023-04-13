@@ -5,18 +5,29 @@ from Models.linearRegression import LIN_REG_ALGO
 from Models.arima import ARIMA_algo
 from Models.lstm import LSTM_ALGO
 from Models.tweetsPolarity import get_tweets_polarity
+from datetime import date, timedelta, datetime
 
 # This function makes a csv file data stock data of each day for 3 years of a given ticker
 
 
-def get_historical(quote):
-    end = datetime.now()
+def get_historical_data(ticker):
+    if datetime.now().strftime("%A") == "Monday":
+        end = (date.today() - timedelta(days=4)).strftime("%Y-%m-%d")
+    elif datetime.now().strftime("%A") == "Sunday":
+        end = (date.today() - timedelta(days=3)).strftime("%Y-%m-%d")
+    elif datetime.now().strftime("%A") == "Saturday":
+        end = (date.today() - timedelta(days=2)).strftime("%Y-%m-%d")
+    elif datetime.now().strftime("%A") == "Friday":
+        end = (date.today() - timedelta(days=1)).strftime("%Y-%m-%d")
+    else:
+        end = datetime.now()
+
     start = datetime(end.year-3, end.month, end.day)
     try:
-        data = yf.download(quote, start=start, end=end, progress=False)
+        data = yf.download(ticker, start=start, end=end, progress=False)
         df = pd.DataFrame(data=data)
         if not df.empty:
-            df.to_csv(''+quote+'.csv')
+            df.to_csv('./temp/'+ticker+'.csv')
             return True
         else:
             return False
@@ -86,9 +97,9 @@ def get_stock_prediction(ticker):
 
             lstm_pred, error_lstm = LSTM_ALGO(df, ticker)
             df, lr_pred, forecast_set, mean, error_lr = LIN_REG_ALGO(df)
-            polarity, tw_list, tw_pol, pos, neg, neutral = retrieving_tweets_polarity(
+            polarity, tw_list, tw_pol, pos, neg, neutral = get_tweets_polarity(
                 ticker)
-            # arima_pred, error_arima=ARIMA_algo(df)
+            arima_pred, error_arima = ARIMA_algo(df)
 
             idea, decision = recommending(df, polarity, today_stock, mean)
             print()
