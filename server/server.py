@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from stocks import get_historical_data, get_today_data,get_current_day_stocks
+from stocks import get_historical_data, get_today_data, get_current_day_stocks
 from flask_cors import CORS
 from getPrediction import get_stock_prediction
 import requests
@@ -25,6 +25,7 @@ def get_historical():
 @app.route("/get_today_data")
 def get_today():
     tickers = request.args.get('tickers')
+    print(tickers)
     tickers = tickers.split(",")
     # print(type(tickers))
     if (len(tickers) != 0):
