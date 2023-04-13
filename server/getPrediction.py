@@ -1,4 +1,3 @@
-from alpha_vantage.timeseries import TimeSeries
 from datetime import datetime
 import yfinance as yf
 import pandas as pd
@@ -13,33 +12,13 @@ def get_historical(quote):
     end = datetime.now()
     start = datetime(end.year-3, end.month, end.day)
     try:
-        data = yf.download(quote, start=start, end=end)
+        data = yf.download(quote, start=start, end=end, progress=False)
         df = pd.DataFrame(data=data)
-        print(df.empty)
         if not df.empty:
             df.to_csv(''+quote+'.csv')
             return True
         else:
-            print("Here")
-            ts = TimeSeries(key='N6A6QT6IBFJOPJ70', output_format='pandas')
-            data, meta_data = ts.get_daily_adjusted(
-                symbol='NSE:'+quote, outputsize='full')
-            print(data)
-            # Format df
-            # Last 3 yrs rows => 502, in ascending order => ::-1
-            data = data.head(754).iloc[::-1]
-            data = data.reset_index()
-            # Keep Required cols only
-            df = pd.DataFrame()
-            df['Date'] = data['date']
-            df['Open'] = data['1. open']
-            df['High'] = data['2. high']
-            df['Low'] = data['3. low']
-            df['Close'] = data['4. close']
-            df['Adj Close'] = data['5. adjusted close']
-            df['Volume'] = data['6. volume']
-            df.to_csv(''+quote+'.csv', index=False)
-            return True
+            return False
     except Exception as e:
         print("got error: ", e)
         return False
@@ -106,7 +85,8 @@ def get_stock_prediction(ticker):
 
             lstm_pred, error_lstm = LSTM_ALGO(df, ticker)
             df, lr_pred, forecast_set, mean, error_lr = LIN_REG_ALGO(df)
-            polarity, tw_list, tw_pol, pos, neg, neutral = retrieving_tweets_polarity(ticker)
+            polarity, tw_list, tw_pol, pos, neg, neutral = retrieving_tweets_polarity(
+                ticker)
 
             idea, decision = recommending(df, polarity, today_stock, mean)
             print()
