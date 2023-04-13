@@ -2,6 +2,7 @@ from datetime import datetime
 import yfinance as yf
 import pandas as pd
 from Models.linearRegression import LIN_REG_ALGO
+from Models.arima import ARIMA_algo
 from Models.lstm import LSTM_ALGO
 from Models.tweetsPolarity import get_tweets_polarity
 
@@ -87,6 +88,7 @@ def get_stock_prediction(ticker):
             df, lr_pred, forecast_set, mean, error_lr = LIN_REG_ALGO(df)
             polarity, tw_list, tw_pol, pos, neg, neutral = retrieving_tweets_polarity(
                 ticker)
+            # arima_pred, error_arima=ARIMA_algo(df)
 
             idea, decision = recommending(df, polarity, today_stock, mean)
             print()

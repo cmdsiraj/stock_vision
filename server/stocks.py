@@ -84,41 +84,16 @@ def get_today_data(tickers=list(), flag="limited"):
 
 def get_current_day_stocks():
     # ticker_list=['TSLA','NFLX','AMC','AI','GOOGL','AMD','MSFT','INTC','AAPL','AMZN','AUY','BAC','APE','NVDA','F']
-    ticker_list = ['TSLA', 'NFLX', 'GOOGL', 'AAPL', 'AMZN', 'NVDA', 'MSFT', 'AI', 'AMC',
-                   'T', 'META', 'PFE', 'BBD', 'FRC', 'NIO', 'VZ', 'MU', 'DNA', 'WBD', 'LEVI', 'KEY']
-    date = datetime.today()
-    previous_date = date - timedelta(days=1)
-    previous_date1 = str(previous_date.year)+"-" + \
-        str(previous_date.month)+"-"+str(previous_date.day)
-    days_before_date = date - timedelta(days=5)
-    days_before_date1 = str(days_before_date.year)+"-" + \
-        str(days_before_date.month)+"-"+str(days_before_date.day)
+    ticker_list=['TSLA','NFLX','GOOGL','AAPL','AMZN','NVDA','MSFT','AI','AMC','T','META','PFE','BBD','FRC','NIO','VZ','MU','DNA','WBD','LEVI','KEY']
+    current_date=date.today().strftime("%m/%d/%Y")
+    previous_date = (date.today() - timedelta(days=5)).strftime("%m/%d/%Y")
     data = list()
-
-    # day_before_previous_date=previous_date-datetime.timedelta(days=1)
-    # date1=str(date.month)+"/"+str(date.day)+"/"+str(date.year)
-    # day_before_previous_date1=str(day_before_previous_date.month)+"/"+str(day_before_previous_date.day)+"/"+str(day_before_previous_date.year)
-
     for i in ticker_list:
-        try:
-            stock_data = get_data(
-                i, start_date=days_before_date1, end_date=previous_date1)
-            value = get_live_price(i)
-            print(stock_data)
-            open_price = stock_data.iloc[-1].Open
-            high = stock_data.iloc[-1].High
-            low = stock_data.iloc[-1].Low
-            prev = stock_data.iloc[-2].High
-            print({
-                "name": i, "value": value, "open": open_price, "high": high, "low": low, "prev": prev,
-            })
-            data.append({
-                "name": i, "value": value, "open": open_price, "high": high, "low": low, "prev": prev,
-            })
-        except Exception as e:
-            print("error: ", e)
-            pass
-
+        stock_data = get_data(
+            i, start_date=previous_date, end_date=current_date)
+        data.append({
+            "name": i, "value": get_live_price(i), "open": stock_data.iloc[-1].open, "high": stock_data.iloc[-1].high, "low": stock_data.iloc[-1].low, "prev": stock_data.iloc[-2].high,
+        })
     return json.dumps(data)
 
 

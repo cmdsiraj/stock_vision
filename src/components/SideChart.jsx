@@ -1,65 +1,87 @@
 import React, { useState, useEffect } from "react";
 import StockChart from "../components/StockChart";
-import StockChartColumn from "./StockChartRow";
+import StockChartRow from "./StockChartRow";
+import SearchBar from "./SearchBar";
 
 const SideChart = () => {
-  const [visible, setVisible] = useState(false);
-  const [stockData, setStockData] = useState([]);
-  const [todayData, setTodayStockData] = useState([]);
+  // const [visible, setVisible] = useState(false);
+  const [stockChartData, setStockChartData] = useState([]);
+  const [charListData, setCharListData] = useState([]);
   const [loadData, setLoadData] = useState(true);
   const [chartTicker, setChartTicker] = useState("");
+  // const [tempCharListData, setTempCharListData] = useState([]);
 
   let tickers = ["AAPL", "GOOG", "AMZN", "TSLA", "MSFT", "META"];
 
   useEffect(() => {
     if (loadData) {
-      setTodayStockData([]);
-      fetch(" http://127.0.0.1:5000/get_today_data?tickers=" + tickers)
-        .then((res) => res.json())
-        .then((data) => {
-          setTodayStockData(data);
-          // get_data(todayData[0].ticker);
-          console.log(todayData);
-          setVisible(true);
-          // console.log(todayData);
-          // alert("data loaded");
-        })
-        .catch((e) => alert("Error in Loading data: " + e));
       setLoadData(false);
+      getChartListData(tickers).then((data) => {
+        setCharListData(data);
+        getAndSetChartData(data[0].ticker);
+      });
+      // setCharListData(data);
+      // getAndSetChartData(data[0].ticker);
     }
+    console.log("I called twice");
   }, [tickers]);
 
-  const get_data = (ticker = "GOOG") => {
+  const getChartListData = async (tickers) => {
+    let data = await fetch(
+      " http://127.0.0.1:5000/get_today_data?tickers=" + tickers
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        return data;
+      })
+      .catch((e) => alert("Error in Loading data: " + e));
+    return data;
+  };
+
+  const getAndSetChartData = (ticker = "GOOG") => {
     // setStockData([]);
     fetch(" http://127.0.0.1:5000/get_stock_data?ticker=" + ticker)
       .then((res) => res.json())
       .then((data) => {
-        setStockData(data);
+        setStockChartData(data);
         setChartTicker(ticker);
-      });
+      })
+      .catch((e) => alert("Error in fetching data: " + e));
+  };
+
+  const addToCharListDataList = (ticker) => {
+    console.log("Button Clicked");
+    getChartListData([ticker]).then((data) => {
+      setCharListData((list) => [data[0], ...list]);
+      getAndSetChartData(ticker);
+    });
   };
 
   return (
-    <>
+    <div className="w-full h-full">
       <div className="flex flex-col">
-        {/* <div className="flex-1 h-48"> */}
-          {stockData.length != 0 ? (
-            <StockChart data={stockData} ticker={chartTicker} />
-          ) : (
-            <h2>Unable to Show Data</h2>
-          )}
-        {/* </div> */}
-        <div className="">
-          {todayData.map((data) => (
-            <StockChartColumn
+        {stockChartData.length != 0 ? (
+          <StockChart data={stockChartData} ticker={chartTicker} />
+        ) : (
+          <h2>Select to show trends</h2>
+        )}
+        <div className="m-2">
+          <SearchBar
+            placeHolder="Ticker Symbol"
+            onClickFunction={addToCharListDataList}
+          />
+        </div>
+        <div className="overflow-auto h-2/6">
+          {charListData.map((data) => (
+            <StockChartRow
               data={data}
-              sign={data.change >= 0 ? "+" : "-"}
-              onClickFunction={() => get_data(data.ticker)}
+              sign={data.change >= 0 ? "+" : ""}
+              onClickFunction={() => getAndSetChartData(data.ticker)}
             />
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
