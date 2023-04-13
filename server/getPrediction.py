@@ -88,7 +88,7 @@ def get_stock_prediction(ticker):
             df, lr_pred, forecast_set, mean, error_lr = LIN_REG_ALGO(df)
             polarity, tw_list, tw_pol, pos, neg, neutral = retrieving_tweets_polarity(
                 ticker)
-            arima_pred, error_arima=ARIMA_algo(df)
+            # arima_pred, error_arima=ARIMA_algo(df)
 
             idea, decision = recommending(df, polarity, today_stock, mean)
             print()

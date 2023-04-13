@@ -17,20 +17,22 @@ function create_row(stock) {
 function StockTable() {
   const [stockData, setData] = useState([]);
   const [visible, setVisible] = useState(false);
-
-   function get_data() {
+  useEffect(() => {
     if (!visible) {
       fetch(" http://127.0.0.1:5000/get_table_display_data")
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           setData(data);
         });
       setVisible(!visible);
-   }}
+   }
+  }, [stockData]);
+  //  function get_data() {
+  //   }
 
   return (
-    <div class="relative overflow-x-hidden shadow-md">
+    <div class="relative w-fit overflow-x-hidden shadow-md">
       <table class="overflow-x-hidden text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
@@ -63,7 +65,7 @@ function StockTable() {
         <tbody>
 
 
-          {get_data()}
+          {/* {get_data()} */}
 
         {visible && stockData.length != 0 ? (
 stockData.map(create_row)

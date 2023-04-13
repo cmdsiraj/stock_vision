@@ -10,13 +10,9 @@ import math, random
 from datetime import datetime
 import datetime as dt
 import yfinance as yf
-import tweepy
-import preprocessor as p
 import re
 from sklearn.linear_model import LinearRegression
 from textblob import TextBlob
-import constants as ct
-# from Tweet import Tweet
 import nltk
 
 def ARIMA_algo(df):
