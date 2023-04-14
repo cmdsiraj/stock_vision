@@ -36,28 +36,28 @@ function StockTable() {
       <table class="overflow-auto text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
-            <th scope="col" class="xl:px-10 lg:px-16 md:px-14 sm:px-10 px-20 sm:px-left py-3 ">
+            <th scope="col" class="2xl:20 xl:px-16  lg:px-16 md:px-12 sm:px-10 px-10 sm:px-left py-3 ">
               Name
             </th>
-            <th scope="col" class="xl:px-8 lg:px-7 md:px-7 sm:px-7 py-3">
+            <th scope="col" class="2xl:10 xl:px-12 lg:px-9 md:px-7 sm:px-7 py-3">
               Value
             </th>
-            <th scope="col" class="xl:px-8 lg:px-7 md:px-7 sm:px-7 py-3">
+            <th scope="col" class="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3">
               Change
             </th>
-            <th scope="col" class="px-9 py-3 ">
+            <th scope="col" class="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3">
               %Change
             </th>
-            <th scope="col" class="px-9 py-3 ">
+            <th scope="col" class="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3">
               Open
             </th>
-            <th scope="col" class="px-9 py-3 ">
+            <th scope="col" class="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3">
               High
             </th>
-            <th scope="col" class="px-9 py-3 ">
+            <th scope="col" class="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3">
               Low
             </th>
-            <th scope="col" class="px-9 py-3 ">
+            <th scope="col" class="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3">
               Previous
             </th>
           </tr>

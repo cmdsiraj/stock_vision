@@ -7,10 +7,10 @@ function Home() {
   return (
     <>
       <div className="flex xl:flex-row lg:flex-row md:flex-row flex-col sm:flex-left">
-          <div className="basis-2/3">
+          <div className="2xl:basis-2/3 xl:basis-2/3 lg:basis-2/3 md:basis-2/3 overflow-scroll sm:overflow-left">
          <StockTable />
           </div>
-          <div className="xl:basis-1/3 lg:basis-1/3 md:basis-full basis-full:sm-basis-left">
+          <div className="2xl:basis-1/3 xl:basis-1/3 lg:basis-1/3 md:basis-1/3 basis-full:sm-basis-left">
         <SideChart />
           </div>
       </div>
