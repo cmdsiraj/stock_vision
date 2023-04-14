@@ -42,10 +42,10 @@ def get_table_display_data():
 @app.route("/get_prediction")
 def get_prediction():
     ticker = request.args.get('ticker')
-    print(ticker)
-    print(type(ticker))
+    # print(ticker)
+    # print(type(ticker))
     prediction = get_stock_prediction(ticker.strip())
-    print(prediction)
+    # print(prediction)
     return prediction
 
 

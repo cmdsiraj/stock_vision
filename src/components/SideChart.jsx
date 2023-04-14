@@ -6,7 +6,7 @@ import SearchBar from "./SearchBar";
 const SideChart = () => {
   // const [visible, setVisible] = useState(false);
   const [stockChartData, setStockChartData] = useState([]);
-  const [charListData, setCharListData] = useState([]);
+  const [chartListData, setChartListData] = useState([]);
   const [loadData, setLoadData] = useState(true);
   const [chartTicker, setChartTicker] = useState("");
   // const [tempCharListData, setTempCharListData] = useState([]);
@@ -17,7 +17,7 @@ const SideChart = () => {
     if (loadData) {
       setLoadData(false);
       getChartListData(tickers).then((data) => {
-        setCharListData(data);
+        setChartListData(data);
         getAndSetChartData(data[0].ticker);
       });
       // setCharListData(data);
@@ -49,28 +49,33 @@ const SideChart = () => {
       .catch((e) => alert("Error in fetching data: " + e));
   };
 
-  function getTickerObject(array, key, value) {
-    for (let i = 0; i < array.length; i++) {
-      if (array[i][key] === value) {
-        return { object: array[i], index: i };
-      }
+  function moveObjectToFront(key, value, array) {
+    const index = array.findIndex((item) => item[key] === value);
+    if (index > -1) {
+      const [itemToMove] = array.splice(index, 1);
+      array.unshift(itemToMove);
+      return array;
+    } else {
+      return -1;
     }
-    return null;
   }
 
-  const addToCharListDataList = (ticker) => {
+  const addToChartListDataList = (ticker) => {
     ticker = ticker.toUpperCase();
-    if (tickers.includes(ticker)) {
-      const { obj, idx } = getTickerObject(charListData, "ticker", ticker);
-      setCharListData((arr) => arr.filter((_, index) => index != idx));
-      setCharListData((arr) => [obj, ...arr]);
+    const newItems = moveObjectToFront("ticker", ticker, chartListData);
+    if (newItems != -1) {
+      const newItems = moveObjectToFront("ticker", ticker, chartListData);
+      setChartListData(newItems);
       getAndSetChartData(ticker);
-      const tkrIdx = ticker.indexOf(ticker);
-      tickers.splice(tkrIdx, 1);
-      tickers.splice(0,0,ticker)
+      console.log(chartListData);
     } else {
       getChartListData([ticker]).then((data) => {
-        setCharListData((list) => [data[0], ...list]);
+        setChartListData((prevArr) => {
+          const newArr = [...prevArr];
+          newArr.pop();
+          return newArr;
+        });
+        setChartListData((arr) => [data[0], ...arr]);
         getAndSetChartData(ticker);
       });
     }
@@ -82,7 +87,7 @@ const SideChart = () => {
       <div className="m-2">
         <SearchBar
           placeHolder="Ticker Symbol"
-          onClickFunction={addToCharListDataList}
+          onClickFunction={addToChartListDataList}
         />
       </div>
       <div className="flex flex-col">
@@ -93,7 +98,7 @@ const SideChart = () => {
         )}
 
         <div className="overflow-y-auto h-1/6">
-          {charListData.map((data) => (
+          {chartListData.map((data) => (
             <StockChartRow
               data={data}
               sign={data.change >= 0 ? "+" : ""}

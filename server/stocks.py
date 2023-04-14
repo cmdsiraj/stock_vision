@@ -19,7 +19,8 @@ def get_historical_data(ticker, start_date="2013-09-05", output="list"):
 
     if output == "list":
         try:
-            data = yf.download(ticker, start=start_date, end=end, progress=False)
+            data = yf.download(ticker, start=start_date,
+                               end=end, progress=False)
             data = pd.DataFrame(data=data)
             # print(data.head())
             df = pd.DataFrame()
@@ -111,7 +112,7 @@ def get_today_data(tickers=list(), flag="limited"):
 def get_current_day_stocks():
     # ticker_list=['TSLA']
     ticker_list = ['TSLA', 'NFLX', 'GOOG', 'AAPL', 'AMZN', 'NVDA', 'MSFT', 'AI', 'AMC',
-                   'T', 'META', 'PFE', 'BBD', 'FRC', 'NIO', 'VZ', 'MU', 'DNA', 'WBD', 'LEVI', 'KEY']
+                   'T', 'META', 'PFE', 'BBD', 'FRC', 'NIO', 'VZ', 'MU', 'DNA', 'WBD', 'LEVI']
     if datetime.now().strftime("%A") == "Monday":
         # end = (date.today() - timedelta(days=4)).strftime("%Y-%m-%d")
         start = (date.today() - timedelta(days=5)).strftime("%Y-%m-%d")
@@ -144,57 +145,3 @@ def get_current_day_stocks():
             print("error in getting "+i)
             print()
     return json.dumps(data)
-
-
-# key = '26NVD1ND5SCLCG70'
-
-
-# previous price = 'close'
-#['time', 'open', 'high', 'low', 'close', 'volume']
-# def prev_data(code):
-#     CSV_URL = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED&symbol=' + \
-#         code+'&interval=15min&slice=year1month1&apikey='+key
-
-#     with requests.Session() as s:
-#         download = s.get(CSV_URL)
-#         decoded_content = download.content.decode('utf-8')
-#         cr = csv.reader(decoded_content.splitlines(), delimiter=',')
-#         my_list = list(cr)
-#         price_dict = {}
-#         for row in my_list:
-#             price_dict[row[0]] = row[4]
-#         return price_dict
-
-
-# def present_price(code):
-#     url = f"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="+code+"&apikey="+key
-#     response = requests.get(url)
-#     data = response.json()
-#     # print(data)
-#     return data
-# # format of present price return value
-# # {'Global Quote': {'01. symbol': 'IBM',
-# #   '02. open': '132.1600',
-# #   '03. high': '132.6000',
-# #   '04. low': '130.3150',
-# #   '05. price': '130.5000',
-# #   '06. volume': '3050581',
-# #   '07. latest trading day': '2023-04-06',
-# #   '08. previous close': '132.1400',
-# #   '09. change': '-1.6400',
-# #   '10. change percent': '-1.2411%'}}
-
-
-# def get_ticker_dict(tickers=list()):
-#     data = []
-#     # today = date.today()
-#     # yesterday=date(today.year, today.month, today.day - 1)
-#     for i in tickers:
-#         ticker_data = present_price(i)['Global Quote']
-#         prev_price = ticker_data['08. previous close']
-#         curr_price = ticker_data['05. price']
-#         change = ticker_data['09. change']
-#         p_change = ticker_data['10. change percent']
-#         data.append({"ticker": i, "curr_Price": curr_price,
-#                     "change": change, "p_change": p_change})
-#     return data
