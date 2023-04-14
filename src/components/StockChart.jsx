@@ -7,9 +7,14 @@ const StockChart = ({ data, ticker }) => {
     const options = {
       chart: {
         type: "line",
+        backgroundColor: "rgb(15 23 42)",
       },
       title: {
         text: ticker,
+        style:{
+          color: "rgb(255 255 255)",
+          fontWeight: "bold"
+        },
       },
       xAxis: {
         type: "datetime",
