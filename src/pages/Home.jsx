@@ -19,10 +19,10 @@ function Home() {
             <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <h1 className="text-white  font-mono-bold tracking-wide mb-4 2xl:text-9xl xl:text-7xl lg:text-7xl md:text-7xl sm:text-7xl">STOCK VISION</h1>
                 <h2 className="text-white  font-mono-bold tracking-wide mb-4 2xl:text-3xl xl:text-3xl lg:text-3xl md:text-3xl sm:text-3xl ">The future of stock market</h2>
-                <div className="opacity-50    flex flex-row grid gap-20 grid-cols-2 text-white  font-mono-bold tracking-wide mb-4 2xl:text-3xl xl:text-3xl lg:text-3xl md:text-3xl sm:text-3xl">
-                        <button  className="rounded-full bg-sky-500 px-6 py-3">Predict future prices</button>
+                <div className="opacity-80    flex flex-row grid gap-20 grid-cols-2 text-white  font-mono-bold tracking-wide mb-4 2xl:text-3xl xl:text-3xl lg:text-3xl md:text-3xl sm:text-3xl">
+                        <button  className="rounded-full  px-6 py-3 hover:bg-gray-800 bg-gray-900 transform hover:scale-110">Predict future prices</button>
 
-                    <button onClick={handleButtonClick} className="rounded-full bg-sky-500 px-6 py-3">live stock prices</button>
+                    <button onClick={handleButtonClick} className="rounded-full bg-sky-500 px-6 py-3 hover:bg-gray-800 bg-gray-900 transform hover:scale-110">live stock prices</button>
                 </div>
             </div>
         </div>
