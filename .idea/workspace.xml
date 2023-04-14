@@ -6,13 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a0a378fd-88e0-4374-8203-6f9af6026342" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/StockChart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/StockChart.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/StockChartRow.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/StockChartRow.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/stockRow.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stockRow.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SideChart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SideChart.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Home.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,6 +45,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\siddh\Documents\stock_vision\src\images" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -60,7 +61,7 @@
       <workItem from="1681411629843" duration="1957000" />
       <workItem from="1681419411487" duration="2340000" />
       <workItem from="1681421825221" duration="4520000" />
-      <workItem from="1681452931533" duration="9211000" />
+      <workItem from="1681452931533" duration="21751000" />
     </task>
     <servers />
   </component>
