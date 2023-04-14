@@ -32,32 +32,32 @@ function StockTable() {
   //   }
 
   return (
-    <div class="relative w-fit overflow-x-hidden shadow-md">
-      <table class="overflow-x-hidden text-sm text-left text-gray-500 dark:text-gray-400">
+    <div class="flex items-stretch pl-1 pt-1 pr-1  relative w-fit overflow-auto shadow-md">
+      <table class="overflow-auto text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
-            <th scope="col" class="px-6 py-3 ">
+            <th scope="col" class="xl:px-10 lg:px-16 md:px-14 sm:px-10 px-20 sm:px-left py-3 ">
               Name
             </th>
-            <th scope="col" class="px-6 py-3 ">
+            <th scope="col" class="xl:px-8 lg:px-7 md:px-7 sm:px-7 py-3">
               Value
             </th>
-            <th scope="col" class="px-6 py-3 ">
+            <th scope="col" class="xl:px-8 lg:px-7 md:px-7 sm:px-7 py-3">
               Change
             </th>
-            <th scope="col" class="px-6 py-3 ">
+            <th scope="col" class="px-9 py-3 ">
               %Change
             </th>
-            <th scope="col" class="px-6 py-3 ">
+            <th scope="col" class="px-9 py-3 ">
               Open
             </th>
-            <th scope="col" class="px-6 py-3 ">
+            <th scope="col" class="px-9 py-3 ">
               High
             </th>
-            <th scope="col" class="px-6 py-3 ">
+            <th scope="col" class="px-9 py-3 ">
               Low
             </th>
-            <th scope="col" class="px-6 py-3 ">
+            <th scope="col" class="px-9 py-3 ">
               Previous
             </th>
           </tr>
@@ -77,7 +77,7 @@ stockData.map(create_row)
 {console.log(stockData)}
         </tbody>
       </table>
-    </div>
+      </div>
   );
 }
 
