@@ -49,34 +49,25 @@ const SideChart = () => {
       .catch((e) => alert("Error in fetching data: " + e));
   };
 
-  const getIndex = async (list, item) => {
-    let idx = 0;
-    const result = await list.map((item) => {
-      if (list.ticker === item) {
-        return idx;
-      } else {
-        idx++;
+  function getTickerObject(array, key, value) {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i][key] === value) {
+        return { object: array[i], index: i };
       }
-    });
-    return result;
-  };
+    }
+    return null;
+  }
 
   const addToCharListDataList = (ticker) => {
     ticker = ticker.toUpperCase();
-    // console.log(checkIsPresent(tickers, ticker));
     if (tickers.includes(ticker)) {
-      console.log(charListData);
-      console.log(ticker);
-      const idx = charListData.indexOf(ticker);
-      console.log(idx);
-      const temp = charListData[idx];
-      console.log(temp);
+      const { obj, idx } = getTickerObject(charListData, "ticker", ticker);
       setCharListData((arr) => arr.filter((_, index) => index != idx));
-      console.log(charListData);
-      setCharListData((arr) => [temp, ...arr]);
-      console.log(charListData);
+      setCharListData((arr) => [obj, ...arr]);
       getAndSetChartData(ticker);
-      console.log();
+      const tkrIdx = ticker.indexOf(ticker);
+      tickers.splice(tkrIdx, 1);
+      tickers.splice(0,0,ticker)
     } else {
       getChartListData([ticker]).then((data) => {
         setCharListData((list) => [data[0], ...list]);
@@ -87,19 +78,20 @@ const SideChart = () => {
   };
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full pr-1">
+      <div className="m-2">
+        <SearchBar
+          placeHolder="Ticker Symbol"
+          onClickFunction={addToCharListDataList}
+        />
+      </div>
       <div className="flex flex-col">
         {stockChartData.length != 0 ? (
           <StockChart data={stockChartData} ticker={chartTicker} />
         ) : (
           <h2>Select to show trends</h2>
         )}
-        <div className="m-2">
-          <SearchBar
-            placeHolder="Ticker Symbol"
-            onClickFunction={addToCharListDataList}
-          />
-        </div>
+
         <div className="overflow-y-auto h-1/6">
           {charListData.map((data) => (
             <StockChartRow
