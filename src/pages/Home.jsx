@@ -6,10 +6,6 @@ import banner from "../images/banner.jpg";
 function Home() {
   return (
     <>
-<<<<<<< HEAD
-      <div>
-        {/* <StockTable /> */}
-=======
         <div className="relative">
             <img src={banner} alt="Stock-Vision" className="2xl:basis-1/3 xl:basis-1/3 lg:basis-1/3 md:basis-1/3 basis-full:sm-basis-left h-auto" />
             <div className=" backdrop-blur-sm absolute inset-0 flex flex-col items-center justify-center">
@@ -23,7 +19,6 @@ function Home() {
          <StockTable />
           </div>
           <div className="2xl:basis-1/3 xl:basis-1/3 lg:basis-1/3 md:basis-1/3 basis-full:sm-basis-left">
->>>>>>> 501ea805ebaeb58ff562f03ef573d27e273ae1ca
         <SideChart />
           </div>
       </div>
