@@ -1,14 +1,10 @@
 import React from "react";
-import today_stock_readings from "./today_stock_readings";
+import TodayStockReadings from "./today_stock_readings"
 function DisplayImage(){
     return(
         <>
-
-
-        }
+            <TodayStockReadings />
         </>
-
-
 
     );
 }
