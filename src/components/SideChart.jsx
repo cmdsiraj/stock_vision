@@ -6,7 +6,7 @@ import SearchBar from "./SearchBar";
 const SideChart = () => {
   // const [visible, setVisible] = useState(false);
   const [stockChartData, setStockChartData] = useState([]);
-  const [chartListData, setChartListData] = useState([]);
+  const [charListData, setCharListData] = useState([]);
   const [loadData, setLoadData] = useState(true);
   const [chartTicker, setChartTicker] = useState("");
   // const [tempCharListData, setTempCharListData] = useState([]);
@@ -17,13 +17,13 @@ const SideChart = () => {
     if (loadData) {
       setLoadData(false);
       getChartListData(tickers).then((data) => {
-        setChartListData(data);
+        setCharListData(data);
         getAndSetChartData(data[0].ticker);
       });
       // setCharListData(data);
       // getAndSetChartData(data[0].ticker);
     }
-    // console.log("I called twice");
+    console.log("I called twice");
   }, [tickers]);
 
   const getChartListData = async (tickers) => {
@@ -49,33 +49,20 @@ const SideChart = () => {
       .catch((e) => alert("Error in fetching data: " + e));
   };
 
-  function moveObjectToFront(key, value, array) {
-    const index = array.findIndex((item) => item[key] === value);
-    if (index > -1) {
-      const [itemToMove] = array.splice(index, 1);
-      array.unshift(itemToMove);
-      return array;
-    } else {
-      return -1;
-    }
-  }
+  const checkIsPresent = (list, item) => {
+    list.map((data) => {
+      if (data === item) return true;
+      else return false;
+    });
+  };
 
-  const addToChartListDataList = (ticker) => {
+  const addToCharListDataList = (ticker) => {
     ticker = ticker.toUpperCase();
-    const newItems = moveObjectToFront("ticker", ticker, chartListData);
-    if (newItems != -1) {
-      const newItems = moveObjectToFront("ticker", ticker, chartListData);
-      setChartListData(newItems);
+    if (checkIsPresent(tickers, ticker)) {
       getAndSetChartData(ticker);
-      console.log(chartListData);
     } else {
       getChartListData([ticker]).then((data) => {
-        setChartListData((prevArr) => {
-          const newArr = [...prevArr];
-          newArr.pop();
-          return newArr;
-        });
-        setChartListData((arr) => [data[0], ...arr]);
+        setCharListData((list) => [data[0], ...list]);
         getAndSetChartData(ticker);
       });
     }
@@ -84,21 +71,21 @@ const SideChart = () => {
 
   return (
     <div className="w-full h-full pr-1">
-      <div className="m-2">
-        <SearchBar
-          placeHolder="Ticker Symbol"
-          onClickFunction={addToChartListDataList}
-        />
-      </div>
+
       <div className="flex flex-col">
         {stockChartData.length != 0 ? (
           <StockChart data={stockChartData} ticker={chartTicker} />
         ) : (
           <h2>Select to show trends</h2>
         )}
-
+        <div className="m-2">
+          <SearchBar
+              placeHolder="Ticker Symbol"
+              onClickFunction={addToCharListDataList}
+          />
+        </div>
         <div className="overflow-y-auto h-1/6">
-          {chartListData.map((data) => (
+          {charListData.map((data) => (
             <StockChartRow
               data={data}
               sign={data.change >= 0 ? "+" : ""}

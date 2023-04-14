@@ -14,7 +14,7 @@ function StockRow(props){
     // (props.value-props.prev).toFixed(2)>0 ? td_class+=" text-green-500" : td_class+=" text-red-500"
     
 return(
-<tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700 transform hover:bg-gray-800">
+<tr class=" bg-gray-900 border-gray-700 transform hover:bg-gray-800">
                 <th  class="px-3 py-2 font-medium text-gray-900 whitespace dark:text-white">
                     {props.name}
                 </th>
