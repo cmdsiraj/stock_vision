@@ -120,7 +120,7 @@ def LSTM_ALGO(df, ticker):
     plt.plot(predicted_stock_price, label='Predicted Price')
 
     plt.legend(loc=4)
-    image_path =  os.path.join(os.path.dirname(__file__), "../../temp/LSTM.png")
+    image_path =  os.path.join(os.path.dirname(__file__), "../../src/temp/LSTM.png")
     plt.savefig(image_path)
     plt.close(fig)
 

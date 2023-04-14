@@ -53,7 +53,7 @@ def LIN_REG_ALGO(df, ticker):
         plt2.plot(y_test_pred, label='Predicted Price')
 
         plt2.legend(loc=4)
-        image_path =  os.path.join(os.path.dirname(__file__), "../../temp/LR.png")
+        image_path =  os.path.join(os.path.dirname(__file__), "../../src/temp/LR.png")
         plt2.savefig(image_path)
         plt2.close(fig)
 

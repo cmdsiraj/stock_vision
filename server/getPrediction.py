@@ -35,7 +35,7 @@ def get_historical_data(ticker):
         if not df.empty:
             file_name = ticker+".csv"
             csv_path = os.path.join(os.path.dirname(
-                __file__), '../temp/'+file_name)
+                __file__), '../src/temp/'+file_name)
             df.to_csv(csv_path)
             print("Out from historical data - 1")
             return True
@@ -92,7 +92,7 @@ def get_stock_prediction(ticker):
         try:
             file_name = ticker+".csv"
             file_path = os.path.join(os.path.dirname(
-                __file__), '../temp/'+file_name)
+                __file__), '../src/temp/'+file_name)
             df = pd.read_csv(file_path)
         except:
             print("Error in locating data")
@@ -130,7 +130,7 @@ def get_stock_prediction(ticker):
                 today_stock = today_stock.round(2)
                 file_name = ticker+".csv"
                 csv_path = os.path.join(os.path.dirname(
-                    __file__), '../temp/'+file_name)
+                    __file__), '../src/temp/'+file_name)
                 df.to_csv(csv_path)
                 os.remove(csv_path)
             except Exception as e:
@@ -139,13 +139,16 @@ def get_stock_prediction(ticker):
             try:
                 print(len(tw_list))
                 result = {"idea": idea, "prediction": decision}
-                pricePredictions = {"ARIMA": str(round(arima_pred, 2)),
-                                    "LSTM": str(round(lstm_pred, 2)), "linReg": str(round(lr_pred, 2))}
-                rmse = {"ARIMA": str(round(error_arima, 2)),
-                        "LSTM": str(round(error_lstm, 2)), "linReg": str(round(error_lr, 2))}
+                pricePredictions = {"ARIMA": str(round(arima_pred, 5)),
+                                    "LSTM": str(round(lstm_pred, 5)), "linReg": str(round(lr_pred, 5))}
+                rmse = {"ARIMA": str(round(error_arima, 5)),
+                        "LSTM": str(round(error_lstm, 5)), "linReg": str(round(error_lr, 5))}
                 tweets = {"list": tw_list, "overallPolarity": tw_pol}
 
-                return {"ticker": ticker, "todayData": df.iloc[-1:].to_json(), "pricePredictions": pricePredictions,
+                todayData = {"code": df.iloc[-1]["code"], "Open": str(round(df.iloc[-1]["Open"], 2)), "High": str(round(df.iloc[-1]["High"], 2)),
+                             "Low": str(round(df.iloc[-1]["Low"], 2)), "Close": str(round(df.iloc[-1]["Close"], 2)), "AdjClose": str(round(df.iloc[-1]["Adj Close"], 2)), "Volume": str(df.iloc[-1]["Volume"])}
+
+                return {"ticker": ticker, "todayData": todayData, "pricePredictions": pricePredictions,
                         "rmse": rmse, "result": result, "foreCast": forecast_set.tolist(), "tweets": tweets}
             except Exception as e:
                 print(e, " (Retrun statement)")

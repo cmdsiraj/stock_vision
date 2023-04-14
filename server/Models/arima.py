@@ -45,7 +45,7 @@ def ARIMA_algo(df, quote):
             fig = plt.figure(figsize=(7.2, 4.8), dpi=65)
             plt.plot(Quantity_date)
             image_path = os.path.join(os.path.dirname(
-                __file__), "../../temp/Trends.png")
+                __file__), "../../src/temp/Trends.png")
             plt.savefig(image_path)
             plt.close(fig)
 
@@ -60,7 +60,7 @@ def ARIMA_algo(df, quote):
             plt.plot(predictions, label='Predicted Price')
             plt.legend(loc=4)
             image_path = os.path.join(os.path.dirname(
-                __file__), "../../temp/ARIMA.png")
+                __file__), "../../src/temp/ARIMA.png")
             plt.savefig(image_path)
             plt.close(fig)
             arima_pred = predictions[-2]

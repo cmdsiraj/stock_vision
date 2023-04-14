@@ -53,7 +53,7 @@ def get_tweets_polarity(ticker):
         for i, tweet in enumerate(sntwitter.TwitterSearchScraper(f'{symbol} since:{str(start)[:10]} until:{str(end)[:10]}').get_items()):
             if i > 300:
                 break
-            tweets_list.append(tweet.content)
+            tweets_list.append(tweet.rawContent)
 
         print("Tweets List length: ", len(tweets_list))
         count = 20
@@ -107,7 +107,7 @@ def get_tweets_polarity(ticker):
         ax1.axis('equal')
         plt.tight_layout()
         image_path = os.path.join(
-            os.path.dirname(__file__), "../../temp/SA.png")
+            os.path.dirname(__file__), "../../src/temp/SA.png")
         plt.savefig(image_path)
         plt.close(fig)
 
