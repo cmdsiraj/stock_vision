@@ -23,7 +23,7 @@ const SideChart = () => {
       // setCharListData(data);
       // getAndSetChartData(data[0].ticker);
     }
-    console.log("I called twice");
+    // console.log("I called twice");
   }, [tickers]);
 
   const getChartListData = async (tickers) => {
@@ -49,17 +49,34 @@ const SideChart = () => {
       .catch((e) => alert("Error in fetching data: " + e));
   };
 
-  const checkIsPresent = (list, item) => {
-    list.map((data) => {
-      if (data === item) return true;
-      else return false;
+  const getIndex = async (list, item) => {
+    let idx = 0;
+    const result = await list.map((item) => {
+      if (list.ticker === item) {
+        return idx;
+      } else {
+        idx++;
+      }
     });
+    return result;
   };
 
   const addToCharListDataList = (ticker) => {
     ticker = ticker.toUpperCase();
-    if (checkIsPresent(tickers, ticker)) {
+    // console.log(checkIsPresent(tickers, ticker));
+    if (tickers.includes(ticker)) {
+      console.log(charListData);
+      console.log(ticker);
+      const idx = charListData.indexOf(ticker);
+      console.log(idx);
+      const temp = charListData[idx];
+      console.log(temp);
+      setCharListData((arr) => arr.filter((_, index) => index != idx));
+      console.log(charListData);
+      setCharListData((arr) => [temp, ...arr]);
+      console.log(charListData);
       getAndSetChartData(ticker);
+      console.log();
     } else {
       getChartListData([ticker]).then((data) => {
         setCharListData((list) => [data[0], ...list]);
