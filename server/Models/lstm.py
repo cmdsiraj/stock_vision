@@ -1,6 +1,7 @@
 import math
 import pandas as pd
 import numpy as np
+import os
 from sklearn.metrics import mean_squared_error
 from sklearn.preprocessing import MinMaxScaler
 from keras.models import Sequential
@@ -9,6 +10,8 @@ from keras.layers import Dropout
 from keras.layers import LSTM
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
+
+# temp_path = os.path.join(os.path.dirname(__file__), "../../temp")
 
 
 def LSTM_ALGO(df, ticker):
@@ -117,7 +120,8 @@ def LSTM_ALGO(df, ticker):
     plt.plot(predicted_stock_price, label='Predicted Price')
 
     plt.legend(loc=4)
-    plt.savefig('LSTM.png')
+    image_path =  os.path.join(os.path.dirname(__file__), "../../temp/LSTM.png")
+    plt.savefig(image_path)
     plt.close(fig)
 
     error_lstm = math.sqrt(mean_squared_error(
