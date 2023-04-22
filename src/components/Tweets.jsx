@@ -20,7 +20,7 @@ function Tweets({ ticker, tweets }) {
               </td>
               <td>
                 {tweets.map((tweet) => {
-                  return <li className="text-lg m-2">{tweet}</li>;
+                  return <li className="text-sm m-2">{tweet}</li>;
                 })}
               </td>
             </tr>
