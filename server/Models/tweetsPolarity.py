@@ -21,19 +21,27 @@ def cleanTweets(text):
     return text
 
 
-def get_start_and_end_date():
-    end = datetime.now()
+# def get_start_and_end_date():
+#     end = datetime.now()
 
-    start = (date.today() - timedelta(days=4))
+#     start = (date.today() - timedelta(days=4))
 
-    return str(start)[:10], str(end)[:10]
+#     return str(start)[:10], str(end)[:10]
+
+def get_tweets(ticker):
+    if ticker:
+        file_path = os.path.join(os.path.dirname(__file__), "../../src/temp/stock_tweets.csv")
+        df = pd.read_csv(file_path)
+        ticker_df = df[df["Stock Name"] == ticker]
+        tweets_list = ticker_df['Tweet'].to_list()
+        return tweets_list
 
 
 def get_tweets_polarity(ticker):
     try:
         try:
             file_path = os.path.join(os.path.dirname(
-                __file__), "../../temp/Yahoo-Finance-Ticker-Symbols.csv")
+                __file__), "../../temp/src/Yahoo-Finance-Ticker-Symbols.csv")
             stock_ticker_map = pd.read_csv(file_path)
             stock_full_form = stock_ticker_map[stock_ticker_map['Ticker'] == ticker]
             symbol = stock_full_form['Name'].to_list()[0][0:12]
@@ -42,18 +50,18 @@ def get_tweets_polarity(ticker):
             symbol = info['longName']
         print(symbol)
 
-        start, end = get_start_and_end_date()
+        # start, end = get_start_and_end_date()
 
         # Creating list to append tweet data to
-        tweets_list = []
+        tweets_list = get_tweets(ticker)
 
         # Using TwitterSearchScraper to scrape data and append tweets to list
-        query = symbol+" since:"+str(start)[:10]+" until:"+str(end)[:10]
-        print(query)
-        for i, tweet in enumerate(sntwitter.TwitterSearchScraper(f'{symbol} since:{str(start)[:10]} until:{str(end)[:10]}').get_items()):
-            if i > 300:
-                break
-            tweets_list.append(tweet.rawContent)
+        # query = symbol+" since:"+str(start)[:10]+" until:"+str(end)[:10]
+        # print(query)
+        # for i, tweet in enumerate(sntwitter.TwitterSearchScraper(f'{symbol} since:{str(start)[:10]} until:{str(end)[:10]}').get_items()):
+        #     if i > 300:
+        #         break
+        #     tweets_list.append(tweet.rawContent)
 
         print("Tweets List length: ", len(tweets_list))
         count = 20
@@ -67,6 +75,7 @@ def get_tweets_polarity(ticker):
         for tweet in tweets_list:
             polarity = 0
             tw = cleanTweets(tweet)
+            # print(tw)
             polarity = TextBlob(tw).sentiment.polarity
             if polarity > 0:
                 pos += 1
@@ -79,13 +88,15 @@ def get_tweets_polarity(ticker):
             if count > 0:
                 tw_list.append(tweet)
                 count = count - 1
+        print()
+        print("Completed tweets polarity calculating")
 
         if len(tweet_list) != 0:
             global_polarity = global_polarity / len(tweet_list)
         else:
             global_polarity = global_polarity
 
-        neutral = 300-pos-neg
+        neutral = len(tweets_list)-pos-neg
         if neutral < 0:
             neg = neg+neutral
             neutral = 20
@@ -128,6 +139,7 @@ def get_tweets_polarity(ticker):
                 "##############################################################################")
             tw_pol = "Overall Negative"
             print(tw_list)
+        print("before sending")
         return global_polarity, tw_list, tw_pol, pos, neg, neutral
     except Exception as e:
         print(e, "(get_tweets_polarity)")

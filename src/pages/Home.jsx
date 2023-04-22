@@ -13,7 +13,7 @@ function Home() {
 
     return (
     <>
-        <div className="relative">
+        {/* <div className="relative">
             <img src={banner} alt="Stock-Vision" className="2xl:basis-1/3 xl:basis-1/3 lg:basis-1/3 md:basis-1/3 basis-full:sm-basis-left" />
             <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <h1 className="text-white  font-mono-bold tracking-wide mb-4 2xl:text-9xl xl:text-7xl lg:text-7xl md:text-7xl sm:text-7xl">STOCK VISION</h1>
@@ -40,8 +40,8 @@ function Home() {
         <div className="2xl:basis-1/3 xl:basis-1/3 lg:basis-1/3 md:basis-1/3 basis-full:sm-basis-left">
           <SideChart />
         </div>
-      </div>
-      {/* <StockPrediction /> */}
+      </div> */}
+      <StockPrediction />
     </>
   );
 }

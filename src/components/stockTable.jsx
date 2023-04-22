@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import StockRow from "./stockRow";
+import StockRow from "./StockRow";
 
 function create_row(stock) {
-  console.log("creat_row");
+  // console.log("creat_row");
   return (
     <StockRow
+      key={stock.name}
       name={stock.name}
       value={stock.value}
       open={stock.open}
@@ -14,6 +15,7 @@ function create_row(stock) {
     />
   );
 }
+
 function StockTable() {
   const [stockData, setData] = useState([]);
   const [visible, setVisible] = useState(false);
@@ -26,58 +28,73 @@ function StockTable() {
           setData(data);
         });
       setVisible(!visible);
-   }
+    }
   }, [stockData]);
   //  function get_data() {
   //   }
 
   return (
-    <div class="flex items-stretch pl-1 pt-1 pr-1  relative w-fit overflow-auto shadow-md">
-      <table class="overflow-auto text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            <th scope="col" class="2xl:20 xl:px-16  lg:px-16 md:px-12 sm:px-10 px-10 sm:px-left py-3 ">
-              Name
-            </th>
-            <th scope="col" class="2xl:10 xl:px-12 lg:px-9 md:px-7 sm:px-7 py-3">
-              Value
-            </th>
-            <th scope="col" class="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3">
-              Change
-            </th>
-            <th scope="col" class="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3">
-              %Change
-            </th>
-            <th scope="col" class="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3">
-              Open
-            </th>
-            <th scope="col" class="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3">
-              High
-            </th>
-            <th scope="col" class="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3">
-              Low
-            </th>
-            <th scope="col" class="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3">
-              Previous
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-
-
-          {/* {get_data()} */}
-
-        {visible && stockData.length != 0 ? (
-stockData.map(create_row)
-      ) : visible && stockData.length === 0 ? (
-        <h2>Unable to Show Data</h2>
+    <span className="flex items-stretch pl-1 pt-1 pr-1  relative w-fit overflow-auto shadow-md">
+      {visible && stockData.length != 0 ? (
+        <table className="overflow-auto text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th
+                scope="col"
+                className="2xl:20 xl:px-16  lg:px-16 md:px-12 sm:px-10 px-10 sm:px-left py-3 "
+              >
+                Name
+              </th>
+              <th
+                scope="col"
+                className="2xl:10 xl:px-12 lg:px-9 md:px-7 sm:px-7 py-3"
+              >
+                Value
+              </th>
+              <th
+                scope="col"
+                className="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3"
+              >
+                Change
+              </th>
+              <th
+                scope="col"
+                className="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3"
+              >
+                %Change
+              </th>
+              <th
+                scope="col"
+                className="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3"
+              >
+                Open
+              </th>
+              <th
+                scope="col"
+                className="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3"
+              >
+                High
+              </th>
+              <th
+                scope="col"
+                className="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3"
+              >
+                Low
+              </th>
+              <th
+                scope="col"
+                className="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3"
+              >
+                Previous
+              </th>
+            </tr>
+          </thead>
+          <tbody>{stockData.map(create_row)}</tbody>
+        </table>
       ) : (
-        <>Click to show!!</>
+        <h2>Unable to Show Data</h2>
       )}
-{console.log(stockData)}
-        </tbody>
-      </table>
-      </div>
+    </span>
   );
 }
 

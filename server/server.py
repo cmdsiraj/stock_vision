@@ -4,6 +4,7 @@ from flask_cors import CORS
 from getPrediction import get_stock_prediction
 import requests
 import csv
+from Models.tweetsPolarity import get_tweets_polarity
 
 app = Flask(__name__)
 CORS(app)
@@ -12,6 +13,17 @@ CORS(app)
 @app.route("/")
 def home():
     return {"message": "welcome"}
+
+
+@app.route("/tweets_polarity")
+def tweets_polarity():
+    ticker = request.args.get('ticker')
+    if ticker:
+        global_polarity, tw_list, tw_pol, pos, neg, neutral = get_tweets_polarity(ticker)
+        print("Got data")
+        return {"global_polarity": global_polarity, "tw_list": tw_list, "tw_pol": tw_pol, "pos": pos, "neg": neg, "neutral": neutral}
+    else:
+        return {"status": "error", "Message": "Please enter a ticker value"}
 
 
 @app.route("/get_stock_data")
