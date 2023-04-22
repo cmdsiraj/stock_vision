@@ -74,16 +74,18 @@ const SideChart = () => {
 
       <div className="flex flex-col">
         {stockChartData.length != 0 ? (
+          <>
           <StockChart data={stockChartData} ticker={chartTicker} />
-        ) : (
-          <h2>Select to show trends</h2>
-        )}
-        <div className="m-2">
+          <div className="m-2">
           <SearchBar
               placeHolder="Ticker Symbol"
               onClickFunction={addToCharListDataList}
           />
         </div>
+        </>
+        ) : (
+<></>        )}
+
         <div className="overflow-y-auto h-1/6">
           {charListData.map((data) => (
             <StockChartRow

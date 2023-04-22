@@ -15,6 +15,7 @@ function create_row(stock) {
   );
 }
 function StockTable() {
+
   const [stockData, setData] = useState([]);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -30,55 +31,51 @@ function StockTable() {
   }, [stockData]);
   //  function get_data() {
   //   }
-
+  const th_style=" text-left 2xl:10 xl:px-8 lg:px-6 md:px-7 sm:px-7 py-3"
   return (
-    <div class="flex items-stretch pl-1 pt-1 pr-1  relative w-fit overflow-auto shadow-md">
-      <table class="overflow-auto text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            <th scope="col" class="2xl:20 xl:px-16  lg:px-16 md:px-12 sm:px-10 px-10 sm:px-left py-3 ">
-              Name
-            </th>
-            <th scope="col" class="2xl:10 xl:px-12 lg:px-9 md:px-7 sm:px-7 py-3">
-              Value
-            </th>
-            <th scope="col" class="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3">
-              Change
-            </th>
-            <th scope="col" class="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3">
-              %Change
-            </th>
-            <th scope="col" class="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3">
-              Open
-            </th>
-            <th scope="col" class="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3">
-              High
-            </th>
-            <th scope="col" class="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3">
-              Low
-            </th>
-            <th scope="col" class="2xl:10 xl:px-9 lg:px-8 md:px-7 sm:px-7 py-3">
-              Previous
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-
-
-          {/* {get_data()} */}
-
+    <div>
         {visible && stockData.length != 0 ? (
-stockData.map(create_row)
+          <div class="flex items-stretch relative w-fit  shadow-md">
+          <table class="border-collapse overflow-y-hidden text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-left text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" class={th_style}>
+                  Name
+                </th>
+                <th scope="col" class={th_style}>
+                  Value
+                </th>
+                <th scope="col" class={th_style}>
+                  Change
+                </th>
+                <th scope="col" class={th_style}>
+                  %Change
+                </th>
+                <th scope="col" class={th_style}>
+                  Open
+                </th>
+                <th scope="col" class={th_style}>
+                  High
+                </th>
+                <th scope="col" class={th_style}>
+                  Low
+                </th>
+                <th scope="col" class={th_style}>
+                  Previous
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+        {stockData.map(create_row)}
+        </tbody>
+        </table>
+        </div>
       ) : visible && stockData.length === 0 ? (
-        <h2>Unable to Show Data</h2>
-      ) : (
+<></>        ) : (
         <>Click to show!!</>
       )}
 {console.log(stockData)}
-        </tbody>
-      </table>
       </div>
   );
 }
-
-export default StockTable;
+ export default StockTable;

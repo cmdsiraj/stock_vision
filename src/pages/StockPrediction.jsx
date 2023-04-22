@@ -5,19 +5,21 @@ import RmsImages from "../components/RmsImages";
 import TodayStockReadings from "../components/TodayStockReadings";
 import ResultFooterImages from "../components/ResultFooterImages";
 import Tweets from "../components/Tweets";
-
+import LoadingScreen from "../components/LoadingScreen"
 function StockPrediction() {
   const [data, setData] = useState("");
   const [tickerName, setTickerName] = useState("");
   const [visible, setVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const style_div =
-    "max-w-sm p-6 text-center h-auto border border-gray-200 rounded-lg shadow bg-blue-600 ";
+    "p-6 basis-1/2 text-center h-auto border border-gray-200 rounded-lg shadow bg-blue-600 ";
   const style_value = "mb-2 text font-bold tracking-tight text-white";
   const style_text =
     "mb-3 font-sans-italic text-sm md:text-base lg:text-base xl:text-base text-gray-300";
 
   const getPrediction = (ticker) => {
+    setIsLoading(true);
     console.log(ticker);
     fetch(" http://127.0.0.1:5000/get_prediction?ticker=" + ticker)
       .then((res) => res.json())
@@ -25,6 +27,7 @@ function StockPrediction() {
         console.log(data);
         setData(data);
         setVisible(true);
+        setIsLoading(false) 
       })
       .catch((e) => alert("Error in fetching data: " + e));
   };
@@ -40,20 +43,19 @@ function StockPrediction() {
     <div className="lg:mx-44 my-6">
       <SearchBar
         placeHolder="Ticker Symbol"
-        onClickFunction={searchForPrediction}
+        onClickFunction={searchForPrediction} disabled={isLoading}
       />
-
-      {visible && data.length != 0 ? (
+      {isLoading ? <LoadingScreen /> : visible && data.length != 0 ? (
         <div>
           <TodayStockReadings data={data.todayData} />
           <>
             <h1 className="font-bold text-2xl px-2 py-3">
               Predictions on {tickerName} stock prices
             </h1>
-            <div class="px-5 sm:grid-cols-2 place-content-around lg:px-12 xl:px-12 py-2 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-3 w-full">
+            <div class="flex flex-row gap-10">
               <div class={style_div}>
+              <p class={style_text}>Overall Tweets Polarity</p>
                 <h5 class={style_value}>{data.tweets.overallPolarity}</h5>
-                <p class={style_text}>Overall Tweets Polarity</p>
               </div>
               <div class={style_div}>
                 <h5 class={style_value}>
@@ -76,8 +78,10 @@ function StockPrediction() {
       ) : visible && data.length === 0 ? (
         <h2>Unable to Show Data</h2>
       ) : (
-        <>Click to show!!</>
+        <></>
       )}
+
+      {}
     </div>
   );
 }
