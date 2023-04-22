@@ -17,6 +17,7 @@ function create_row(stock) {
 }
 
 function StockTable() {
+
   const [stockData, setData] = useState([]);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -32,7 +33,7 @@ function StockTable() {
   }, [stockData]);
   //  function get_data() {
   //   }
-
+  const th_style=" text-left 2xl:10 xl:px-8 lg:px-6 md:px-7 sm:px-7 py-3"
   return (
     <span className="flex items-stretch pl-1 pt-1 pr-1  relative w-fit overflow-auto shadow-md">
       {visible && stockData.length != 0 ? (
@@ -97,5 +98,4 @@ function StockTable() {
     </span>
   );
 }
-
-export default StockTable;
+ export default StockTable;
