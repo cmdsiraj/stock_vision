@@ -1,5 +1,5 @@
 import React from "react";
-import CurrencyInput from "../components/Currencyinput"
+import CurrencyInput from "../components/CurrencyInput"
 import {useState, useEffect} from "react";
 import axios from "axios";
 import banner from "../images/currency1.jpg"
