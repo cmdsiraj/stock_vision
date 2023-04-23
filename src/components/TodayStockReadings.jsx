@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 function TodayStockReadings({ data }) {
-  const text_style1 = "text-2xl font-serif tracking-tight text-white";
+  const text_style1 = "text-2xl font-sans  font-bold  tracking-tight text-white";
   const text_style2 =
     "mb-3 font-sans-italic text-sm md:text-base lg:text-base xl:text-base text-white";
   return (

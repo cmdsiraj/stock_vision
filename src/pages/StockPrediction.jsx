@@ -57,17 +57,13 @@ function StockPrediction() {
             </h1>
             <div class="flex flex-row gap-10">
               <div class={style_div}>
-              {/* <p class={style_text}>Overall Tweets Polarity</p>
-                <h5 class={style_value}>{data.tweets.overallPolarity}</h5> */}
+              <p class={style_text}>Overall Tweets Polarity</p>
+                <h5 class={style_value}>{data.tweets.overallPolarity}</h5>
               </div>
               <div class={style_div}>
                 <h5 class={style_value}>
                   According to ML Predictions and Sentiment Analysis of Tweets,
-                  a 
-                  {/* {data.result.idea}  */}
-                  in {tickerName} stock is Expected.{" "}
-                  {/* {data.result.prediction} */}
-                  ING stock is Recommended.
+                  a {data.result.idea} in {tickerName} stock is expected. {data.result.prediction}ING stock is Recommended.
                 </h5>
               </div>
             </div>
@@ -79,7 +75,7 @@ function StockPrediction() {
             rmse={data.rmse}
           />
           <ResultFooterImages ticker={tickerName} data={data.foreCast} />
-          {/* <Tweets ticker={tickerName} tweets={data.tweets.list} /> */}
+          <Tweets ticker={tickerName} tweets={data.tweets.list} />
         </div>
       ) : visible && data.length === 0 ? (
         <h2>Unable to Show Data</h2>
