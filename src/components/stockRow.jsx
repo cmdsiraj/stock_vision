@@ -1,15 +1,18 @@
-import React from "react";
+import { waitForElementToBeRemoved } from '@testing-library/react';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-function StockRow(props) {
-  // console.log('hellooo')
-  // console.log(props)
-  let td_class = "px-6 py-2";
-  if ((props.value - props.prev).toFixed(2) > 0) {
-    td_class += " text-green-500";
-  } else {
-    td_class += " text-red-500";
-  }
-  // (props.value-props.prev).toFixed(2)>0 ? td_class+=" text-green-500" : td_class+=" text-red-500"
+function StockRow(props){
+    console.log('hellooo')
+    console.log(props)
+    let td_class="text-center"
+    let td_class1="text-center"
+    if((props.value-props.prev).toFixed(2)>0){
+        td_class1+=" text-green-500"
+    }
+    else{
+        td_class1+=" text-red-500"
+    }
 
   return (
     <React.Fragment>

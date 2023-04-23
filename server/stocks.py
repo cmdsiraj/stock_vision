@@ -113,21 +113,21 @@ def get_current_day_stocks():
     # ticker_list=['TSLA']
     ticker_list = ['TSLA', 'NFLX', 'GOOG', 'AAPL', 'AMZN', 'NVDA', 'MSFT', 'AI', 'AMC',
                    'T', 'META', 'PFE', 'BBD', 'FRC', 'NIO', 'VZ', 'MU', 'DNA', 'WBD', 'LEVI']
-    if datetime.now().strftime("%A") == "Monday":
-        # end = (date.today() - timedelta(days=4)).strftime("%Y-%m-%d")
-        start = (date.today() - timedelta(days=5)).strftime("%Y-%m-%d")
-    elif datetime.now().strftime("%A") == "Sunday":
-        # end = (date.today() - timedelta(days=3)).strftime("%Y-%m-%d")
-        start = (date.today() - timedelta(days=4)).strftime("%Y-%m-%d")
-    elif datetime.now().strftime("%A") == "Saturday":
-        # end = (date.today() - timedelta(days=2)).strftime("%Y-%m-%d")
-        start = (date.today() - timedelta(days=3)).strftime("%Y-%m-%d")
-    elif datetime.now().strftime("%A") == "Friday":
-        # end = (date.today() - timedelta(days=1)).strftime("%Y-%m-%d")
-        start = (date.today() - timedelta(days=2)).strftime("%Y-%m-%d")
-    else:
-        # end = datetime.now()
-        start = (date.today() - timedelta(days=1)).strftime("%Y-%m-%d")
+    # if datetime.now().strftime("%A") == "Monday":
+    #     # end = (date.today() - timedelta(days=4)).strftime("%Y-%m-%d")
+    #     start = (date.today() - timedelta(days=5)).strftime("%Y-%m-%d")
+    # elif datetime.now().strftime("%A") == "Sunday":
+    #     # end = (date.today() - timedelta(days=3)).strftime("%Y-%m-%d")
+    #     start = (date.today() - timedelta(days=4)).strftime("%Y-%m-%d")
+    # elif datetime.now().strftime("%A") == "Saturday":
+    #     # end = (date.today() - timedelta(days=2)).strftime("%Y-%m-%d")
+    #     start = (date.today() - timedelta(days=3)).strftime("%Y-%m-%d")
+    # elif datetime.now().strftime("%A") == "Friday":
+    #     # end = (date.today() - timedelta(days=1)).strftime("%Y-%m-%d")
+    #     start = (date.today() - timedelta(days=2)).strftime("%Y-%m-%d")
+    # else:
+    #     # end = datetime.now()
+    start = (date.today() - timedelta(days=2)).strftime("%Y-%m-%d")
     end = date.today().strftime("%Y-%m-%d")
     print(end)
     print(start)
