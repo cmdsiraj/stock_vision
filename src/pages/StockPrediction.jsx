@@ -6,6 +6,7 @@ import TodayStockReadings from "../components/TodayStockReadings";
 import ResultFooterImages from "../components/ResultFooterImages";
 import Tweets from "../components/Tweets";
 import LoadingScreen from "../components/LoadingScreen"
+import Navbar from "../components/Navbar";
 function StockPrediction() {
   const [data, setData] = useState("");
   const [tickerName, setTickerName] = useState("");
@@ -40,6 +41,8 @@ function StockPrediction() {
     console.log(ticker);
   };
   return (
+    <div>
+      <Navbar/>
     <div className="lg:mx-44 my-6">
       <SearchBar
         placeHolder="Ticker Symbol"
@@ -54,14 +57,17 @@ function StockPrediction() {
             </h1>
             <div class="flex flex-row gap-10">
               <div class={style_div}>
-              <p class={style_text}>Overall Tweets Polarity</p>
-                <h5 class={style_value}>{data.tweets.overallPolarity}</h5>
+              {/* <p class={style_text}>Overall Tweets Polarity</p>
+                <h5 class={style_value}>{data.tweets.overallPolarity}</h5> */}
               </div>
               <div class={style_div}>
                 <h5 class={style_value}>
                   According to ML Predictions and Sentiment Analysis of Tweets,
-                  a {data.result.idea} in {tickerName} stock is Expected.{" "}
-                  {data.result.prediction}ING stock is Recommended.
+                  a 
+                  {/* {data.result.idea}  */}
+                  in {tickerName} stock is Expected.{" "}
+                  {/* {data.result.prediction} */}
+                  ING stock is Recommended.
                 </h5>
               </div>
             </div>
@@ -73,7 +79,7 @@ function StockPrediction() {
             rmse={data.rmse}
           />
           <ResultFooterImages ticker={tickerName} data={data.foreCast} />
-          <Tweets ticker={tickerName} tweets={data.tweets.list} />
+          {/* <Tweets ticker={tickerName} tweets={data.tweets.list} /> */}
         </div>
       ) : visible && data.length === 0 ? (
         <h2>Unable to Show Data</h2>
@@ -82,6 +88,7 @@ function StockPrediction() {
       )}
 
       {}
+    </div>
     </div>
   );
 }

@@ -1,8 +1,9 @@
 import React from "react";
-import CurrencyInput from "../components/CurrencyInput"
+import CurrencyInput from "../components/Currencyinput"
 import {useState, useEffect} from "react";
 import axios from "axios";
-import banner from "../images/banner.jpg"
+import banner from "../images/currency1.jpg"
+import Navbar from "../components/Navbar";
 
 function Converter() {
     const [amount1, setAmount1] = useState(1);
@@ -12,7 +13,7 @@ function Converter() {
     const [rates, setRates] = useState([]);
 
     useEffect(() => {
-        axios.get('https://api.apilayer.com/fixer/latest?base=USD&apikey=PVove4ByQkKlHtQeSwSkj9H8z5zQp3YH')
+        axios.get('https://api.apilayer.com/fixer/latest?base=USD&apikey=iP72mHtyOnMeZ6ob47LE08NBLlUjlQMz')
             .then(response => {
                 setRates(response.data.rates);
             })
@@ -35,17 +36,18 @@ function Converter() {
         setCurrency2(currency2);
     }
     return (
-
+<div>
+    <Navbar/>
         <div className="min-h-screen bg-gray-800 flex flex-col justify-center items-center">
             <div className="absolute w-full h-full">
                 <img
-                    className="w-full h-full object-fill filter blur-sm "
+                    className="w-full h-full object-fill filter"
                     src={banner}
                     alt="Background"
                 />
             </div>
-            <div className="w-full md:w-1/2 lg:w-1/3 bg-slate-600 rounded-lg shadow-md p-6 flex flex-col items-center justify-center backdrop-filter backdrop-blur-lg opacity-80">
-                <h1 className="text-white text-3xl md:text-4xl lg:text-5xl font-bold mb-8">Currency Converter</h1>
+            <div className="w-full md:w-1/2 lg:w-1/3 bg-slate-600 rounded-lg shadow-md p-6 flex flex-col items-center justify-center backdrop-filter backdrop-blur-lg opacity-90">
+                <h1 className="text-white font-light text-3xl md:text-3xl lg:text-3xl mb-8">Currency Converter</h1>
                 <CurrencyInput
                     onAmountChange={handleAmount1Change}
                     onCurrencyChange={currency1Change}
@@ -65,10 +67,7 @@ function Converter() {
             </div>
 
         </div>
+        </div>
     );
-
-
-
 }
-
 export default Converter;

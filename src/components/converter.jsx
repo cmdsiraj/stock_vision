@@ -1,11 +1,11 @@
-import CurrencyInput from "./currencyinput";
+import CurrencyInput from "./Currencyinput";
 import {useState, useEffect} from "react";
 import axios from "axios";
 
 function Converter() {
 
   const [amount1, setAmount1] = useState(1);
-  const [amount2, setAmount2] = useState(1);
+  const [amount2, setAmount2] = useState(0.90);
   const [currency1, setCurrency1] = useState('USD');
   const [currency2, setCurrency2] = useState('EUR');
   const [rates, setRates] = useState([]);
