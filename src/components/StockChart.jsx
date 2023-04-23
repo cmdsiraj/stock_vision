@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Highcharts from "highcharts/highstock";
-import HighchartsReact from "highcharts-react-official";
 
 const StockChart = ({ data, ticker }) => {
   useEffect(() => {
@@ -11,9 +10,9 @@ const StockChart = ({ data, ticker }) => {
       },
       title: {
         text: ticker,
-        style:{
+        style: {
           color: "rgb(255 255 255)",
-          fontWeight: "bold"
+          fontWeight: "bold",
         },
       },
       xAxis: {
@@ -30,6 +29,9 @@ const StockChart = ({ data, ticker }) => {
           data: data.map((d) => [new Date(d.date).getTime(), d.price]),
         },
       ],
+      accessibility: {
+        enabled: false, 
+      },
     };
 
     const chart = Highcharts.stockChart("stock-chart", options);
@@ -38,7 +40,7 @@ const StockChart = ({ data, ticker }) => {
     };
   }, [data]);
 
-  return <div id="stock-chart" />;
+  return <div id="stock-chart"/>;
 };
 
 export default StockChart;

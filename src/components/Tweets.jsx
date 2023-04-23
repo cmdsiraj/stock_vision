@@ -10,8 +10,10 @@ function Tweets({ ticker, tweets }) {
         </h3>
         <table className="">
           <thead>
-            <th>#</th>
-            <th>Tweets</th>
+            <tr>
+              <th>#</th>
+              <th>Tweets</th>
+            </tr>
           </thead>
           <tbody>
             <tr>
@@ -20,7 +22,11 @@ function Tweets({ ticker, tweets }) {
               </td>
               <td>
                 {tweets.map((tweet) => {
-                  return <li className="text-sm m-2">{tweet}</li>;
+                  return (
+                    <li className="text-lg m-2" key={tweet}>
+                      {tweet}
+                    </li>
+                  );
                 })}
               </td>
             </tr>
@@ -31,15 +37,3 @@ function Tweets({ ticker, tweets }) {
   );
 }
 export default Tweets;
-
-{
-  /* <button className="rounded-lg text-left  px-10 py-3  bg-slate-300 flex flex-col">
-          <h1 className="font-bold text-2xl px-2 py-3">
-            Recent Tweets about {ticker}
-          </h1>
-          <p className="text-sky-400/ py-2">#Twitter</p>
-          {tweets.map((tweet) => {
-            return <p className="font-semibold text-lg">{tweet}</p>;
-          })}
-        </button> */
-}

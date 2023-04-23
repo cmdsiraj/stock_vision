@@ -7,23 +7,22 @@ const SideChart = () => {
   // const [visible, setVisible] = useState(false);
   const [stockChartData, setStockChartData] = useState([]);
   const [charListData, setCharListData] = useState([]);
-  const [loadData, setLoadData] = useState(true);
+  const [loadData, setLoadData] = useState(false);
   const [chartTicker, setChartTicker] = useState("");
   // const [tempCharListData, setTempCharListData] = useState([]);
 
   let tickers = ["AAPL", "GOOG", "AMZN", "TSLA", "MSFT", "META"];
 
   useEffect(() => {
-    if (loadData) {
-      setLoadData(false);
+    if (!loadData) {
       getChartListData(tickers).then((data) => {
         setCharListData(data);
         getAndSetChartData(data[0].ticker);
       });
       // setCharListData(data);
       // getAndSetChartData(data[0].ticker);
+      setLoadData(!loadData);
     }
-    console.log("I called twice");
   }, [tickers]);
 
   const getChartListData = async (tickers) => {
@@ -71,15 +70,14 @@ const SideChart = () => {
 
   return (
     <div className="w-full h-full pr-1">
-
       <div className="flex flex-col">
         {stockChartData.length != 0 ? (
           <>
           <StockChart data={stockChartData} ticker={chartTicker} />
           <div className="m-2">
           <SearchBar
-              placeHolder="Ticker Symbol"
-              onClickFunction={addToCharListDataList}
+            placeHolder="Ticker Symbol"
+            onClickFunction={addToCharListDataList}
           />
         </div>
         </>
@@ -89,6 +87,7 @@ const SideChart = () => {
         <div className="overflow-y-auto h-1/6">
           {charListData.map((data) => (
             <StockChartRow
+              key={data.ticker}
               data={data}
               sign={data.change >= 0 ? "+" : ""}
               onClickFunction={() => getAndSetChartData(data.ticker)}
