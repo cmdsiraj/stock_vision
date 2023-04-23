@@ -3,8 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 function StockRow(props){
-    console.log('hellooo')
-    console.log(props)
+    // console.log('hellooo')
+    // console.log(props)
     let td_class="text-center"
     let td_class1="text-center"
     if((props.value-props.prev).toFixed(2)>0){
