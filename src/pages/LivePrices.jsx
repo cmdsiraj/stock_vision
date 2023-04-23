@@ -2,7 +2,6 @@ import React,{useRef} from "react";
 import {useNavigate} from 'react-router-dom';
 import SideChart from "../components/SideChart";
 import StockTable from "../components/stockTable";
-import Converter from "../components/converter";
 import banner from "../images/banner.jpg";
 import StockPrediction from "./StockPrediction";
 import LoadingScreen from "../components/LoadingScreen"
