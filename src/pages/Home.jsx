@@ -1,39 +1,21 @@
 import React,{useRef} from "react";
 import {useNavigate} from 'react-router-dom';
-import banner from "../images/banner.jpg";
+import banner1 from "../images/banner10.jpg";
+import Navbar from "../components/Navbar";
 function Home() {
     const navigate = useNavigate();
     return (
-    <>
-        <div className="relative">
-            <img src={banner} alt="Stock-Vision" className="2xl:basis-1/3 xl:basis-1/3 lg:basis-1/3 md:basis-1/3 basis-full:sm-basis-left" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <h1 className="text-white  font-mono-bold tracking-wide mb-4 2xl:text-9xl xl:text-7xl lg:text-7xl md:text-7xl sm:text-7xl">STOCK VISION</h1>
-                <h2 className="text-white  font-mono-bold tracking-wide mb-4 2xl:text-3xl xl:text-3xl lg:text-3xl md:text-3xl sm:text-3xl ">The future of stock market</h2>
-                <div className="opacity-80  flex flex-row grid gap-20 grid-cols-2 text-white  font-mono-bold tracking-wide mb-4 2xl:text-3xl xl:text-3xl lg:text-3xl md:text-3xl sm:text-3xl">
-                        <button onClick={() => navigate("/stockPrediction")} className="rounded-full  px-6 py-3 hover:bg-gray-800 bg-gray-900 transform hover:scale-110">Predict future prices</button>
+    <> 
+    <Navbar/>
+        <div className="relative h-full">
+        <div className="opacity-100 inset-20 absolute inset-0 h-0 w-12 block max-w-sm p-6 bg-transparent">
+            <h1 className="inset -absolute mb-2 text-6xl font-bold tracking-tight text-gray-900  dark:text-slate-200">PREDICT</h1>
+            <h1 className="inset -absolute mb-2 text-center text-6xl font-bold tracking-tight text-gray-900">THE</h1>
+            <h1 className="inset -absolute mb-2 text-6xl font-bold tracking-tight text-gray-900  dark:text-slate-200">FUTURE</h1>
 
-                    <button onClick={()=>navigate("/livePrices")} className="rounded-full bg-sky-500 px-6 py-3 hover:bg-gray-800 bg-gray-900 transform hover:scale-110">live stock prices</button>
-                </div>
-            </div>
         </div>
-      <div className="flex xl:flex-row lg:flex-row md:flex-row flex-col sm:flex-left">
-          <div ref={liveRef}  className="2xl:basis-2/3 xl:basis-2/3 lg:basis-2/3 md:basis-1/3 overflow-scroll sm:overflow-left" >
-              <StockTable />
-          </div>
-          <div className="2xl:basis-1/3 xl:basis-1/3 lg:basis-1/3 md:basis-1/3 basis-full:sm-basis-left">
-        <SideChart />
-          </div>
-      </div>
-      <div className="flex xl:flex-row lg:flex-row md:flex-row flex-col sm:flex-left">
-        <div className="2xl:basis-2/3 xl:basis-2/3 lg:basis-2/3 md:basis-1/3 overflow-scroll sm:overflow-left">
-          <StockTable />
+            <img src={banner1} alt="Stock-Vision" className=" w-full 2xl:basis-1/3 xl:basis-1/3 lg:basis-1/3 md:basis-1/3 basis-full:sm-basis-left" />
         </div>
-        <div className="2xl:basis-1/3 xl:basis-1/3 lg:basis-1/3 md:basis-1/3 basis-full:sm-basis-left">
-          <SideChart />
-        </div>
-      </div>
-      <StockPrediction />
     </>
   );
 }

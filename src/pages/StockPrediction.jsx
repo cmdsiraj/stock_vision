@@ -6,6 +6,7 @@ import TodayStockReadings from "../components/TodayStockReadings";
 import ResultFooterImages from "../components/ResultFooterImages";
 import Tweets from "../components/Tweets";
 import LoadingScreen from "../components/LoadingScreen"
+import Navbar from "../components/Navbar";
 function StockPrediction() {
   const [data, setData] = useState("");
   const [tickerName, setTickerName] = useState("");
@@ -40,6 +41,8 @@ function StockPrediction() {
     console.log(ticker);
   };
   return (
+    <div>
+      <Navbar/>
     <div className="lg:mx-44 my-6">
       <SearchBar
         placeHolder="Ticker Symbol"
@@ -60,8 +63,7 @@ function StockPrediction() {
               <div class={style_div}>
                 <h5 class={style_value}>
                   According to ML Predictions and Sentiment Analysis of Tweets,
-                  a {data.result.idea} in {tickerName} stock is Expected.{" "}
-                  {data.result.prediction}ING stock is Recommended.
+                  a {data.result.idea} in {tickerName} stock is expected. {data.result.prediction}ING stock is Recommended.
                 </h5>
               </div>
             </div>
@@ -82,6 +84,7 @@ function StockPrediction() {
       )}
 
       {}
+    </div>
     </div>
   );
 }
