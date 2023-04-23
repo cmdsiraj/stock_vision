@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import NewsCard from "../components/NewsCard";
+import Navbar from "../components/Navbar";
 
 const News = () => {
   const [topUsBusinessNews, setTopUsBusinessNews] = useState([{}]);
@@ -44,39 +45,43 @@ const News = () => {
     }
   }, []);
   return (
-    <div className="p-4">
-      <div>
-        <h1 className="text-6xl font-bold font-serif">Trending News</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 m-4">
-          {topUsBusinessNews.map((news) => (
-            <NewsCard
-              image={news.urlToImage}
-              headline={news.title}
-              source={news.source ? news.source.name : "Stock Vision"}
-              description={news.description}
-              author={news.author ? news.author : "Stock Vision"}
-              time={news.publishedAt}
-            />
-          ))}
+    <>
+      <Navbar />
+      <div className="p-4">
+        <div className="mb-4">
+          <h1 className="text-6xl font-bold font-serif">Trending News</h1>
+          <div className="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 m-4">
+            {topUsBusinessNews.map((news) => (
+              <NewsCard
+                image={news.urlToImage}
+                headline={news.title}
+                source={news.source ? news.source.name : "Stock Vision"}
+                description={news.description}
+                author={news.author ? news.author : "Stock Vision"}
+                time={news.publishedAt}
+                url={news.url}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="mb-4">
+          <h1 className="text-6xl font-bold font-serif">Tech Crunch</h1>
+          <div className="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 m-4">
+            {topTechCrunchNews.map((news) => (
+              <NewsCard
+                image={news.urlToImage}
+                headline={news.title}
+                source={news.source ? news.source.name : "Stock Vision"}
+                description={news.description}
+                author={news.author ? news.author : "Stock Vision"}
+                time={news.publishedAt}
+                content={news.content}
+              />
+            ))}
+          </div>
         </div>
       </div>
-      <div>
-        <h1 className="text-6xl font-bold font-serif">Tech Crunch</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 m-4">
-          {topTechCrunchNews.map((news) => (
-            <NewsCard
-              image={news.urlToImage}
-              headline={news.title}
-              source={news.source ? news.source.name : "Stock Vision"}
-              description={news.description}
-              author={news.author ? news.author : "Stock Vision"}
-              time={news.publishedAt}
-              content={news.content}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const NewsCard = ({
   image,
@@ -7,7 +8,7 @@ const NewsCard = ({
   description,
   author,
   time,
-  content,
+  url,
 }) => {
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden w-full">
@@ -17,7 +18,8 @@ const NewsCard = ({
           {source}
         </div>
         <a
-          href="#"
+          href={url}
+          target="_blank"
           className="block mt-1 text-lg leading-tight font-medium text-black hover:underline"
         >
           {headline}
@@ -26,9 +28,11 @@ const NewsCard = ({
       </div>
       <div className="flex justify-between items-center p-4 bg-gray-100">
         <div className="text-xs text-gray-600">{`By ${author} | ${time}`}</div>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Read More
-        </button>
+        <a href={url} target="_blank">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Read More
+          </button>
+        </a>
       </div>
     </div>
   );
