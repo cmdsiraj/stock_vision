@@ -5,8 +5,8 @@ function Tweets({ ticker, tweets }) {
   return (
     <>
       <div className="rounded-lg text-left text-top bg-cyan-100 p-4 m-4">
-        <h3 className="font-bold text-2xl px-2 py-3">
-          RECENT TWEETS ABOUT {ticker}
+        <h3 className="font-sans text-2xl px-2 py-3">
+          Recent TWEETS about {ticker}
         </h3>
         <table className="">
           <thead>
@@ -23,7 +23,7 @@ function Tweets({ ticker, tweets }) {
               <td>
                 {tweets.map((tweet) => {
                   return (
-                    <li className="text-lg m-2" key={tweet}>
+                    <li className="text-sm font-mono m-2" key={tweet}>
                       {tweet}
                     </li>
                   );
