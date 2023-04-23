@@ -5,7 +5,7 @@ function StockChartRow({ data, onClickFunction, sign }) {
   return (
     <>
       <div
-        className="flex flex-row border-solid border-2 p-1 items-center bg-gray-700 text-white text-sm hover:bg-gray-800 active:bg-gray-900 hover:cursor-pointer active:cursor-wait transform hover:scale-105"
+        className=" flex flex-row border-solid border-2 p-0.5 items-center bg-gray-900 text-white text-sm hover:bg-gray-800 active:bg-gray-900 hover:cursor-pointer active:cursor-wait transform hover:scale-105"
         onClick={onClickFunction}
       >
         <span className="flex-auto ps-4">{data.ticker}</span>
