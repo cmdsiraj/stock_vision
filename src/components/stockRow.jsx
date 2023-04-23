@@ -12,7 +12,7 @@ function StockRow(props) {
   // (props.value-props.prev).toFixed(2)>0 ? td_class+=" text-green-500" : td_class+=" text-red-500"
 
   return (
-    <>
+    <React.Fragment>
       <tr className=" bg-gray-900 border-gray-700 transform hover:bg-gray-800">
         <th
           className="px-3 py-2 font-medium text-gray-900 whitespace dark:text-white"
@@ -42,7 +42,7 @@ function StockRow(props) {
           {props.prev.toFixed(2)}
         </td>
       </tr>
-    </>
+    </React.Fragment>
   );
 }
 export default StockRow;

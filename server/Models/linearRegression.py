@@ -12,32 +12,39 @@ plt.style.use('ggplot')
 
 def LIN_REG_ALGO(df, ticker):
     try:
+        print(df.columns)
         # No of days to be forcasted in future
         forecast_out = int(7)
+        # print(df)
+        # print(df['Close'])
         # Price after n days
         df['Close after n days'] = df['Close'].shift(-forecast_out)
+        # print(df['Close after n days'])
         # New df with only relevant data
         df_new = df[['Close', 'Close after n days']]
         # Structure data for train, test & forecast
         # lables of known data, discard last 35 rows
+        # print(df_new)
         y = np.array(df_new.iloc[:-forecast_out, -1])
         y = np.reshape(y, (-1, 1))
         # all cols of known data except lables, discard last 35 rows
         X = np.array(df_new.iloc[:-forecast_out, 0:-1])
         # Unknown, X to be forecasted
         X_to_be_forecasted = np.array(df_new.iloc[-forecast_out:, 0:-1])
+        # print("X_to_be_forecasted")
+        # print()
 
         # Traning, testing to plot graphs, check accuracy
         X_train = X[0:int(0.8*len(df)), :]
         X_test = X[int(0.8*len(df)):, :]
         y_train = y[0:int(0.8*len(df)), :]
         y_test = y[int(0.8*len(df)):, :]
-
         # Feature Scaling===Normalization
+        # print(X_train, X_test, y_train, y_test)
         sc = StandardScaler()
         X_train = sc.fit_transform(X_train)
         X_test = sc.transform(X_test)
-
+        # print("standard scalar")
         X_to_be_forecasted = sc.transform(X_to_be_forecasted)
 
         # Training

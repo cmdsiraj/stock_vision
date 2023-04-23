@@ -6,7 +6,7 @@ function TodayStockReadings({ data }) {
     "mb-3 font-sans-italic text-sm md:text-base lg:text-base xl:text-base text-white";
   return (
     <>
-      {console.log(data.Close)}
+      {/* {console.log(data.Close)} */}
       <div>
         <h1 className="font-bold text-2xl px-2 py-3">
           Today's stock data for {data.code}

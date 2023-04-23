@@ -144,4 +144,4 @@ def get_current_day_stocks():
             print(e)
             print("error in getting "+i)
             print()
-    return json.dumps(data)
+    return data

@@ -10,8 +10,10 @@ function Tweets({ ticker, tweets }) {
         </h3>
         <table className="">
           <thead>
-            <th>#</th>
-            <th>Tweets</th>
+            <tr>
+              <th>#</th>
+              <th>Tweets</th>
+            </tr>
           </thead>
           <tbody>
             <tr>
